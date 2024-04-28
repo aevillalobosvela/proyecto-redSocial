@@ -1,14 +1,17 @@
 <template>
   <div>
+    <MainLayout/>
     <MainComp/>
   </div>
 </template>
 
 <script>
 import MainComp from "@/components/MainComp.vue";
+import MainLayout from "@/components/MainLayout.vue";
 export default {
   components: {
     MainComp,
+    MainLayout
   }
 }
 </script>

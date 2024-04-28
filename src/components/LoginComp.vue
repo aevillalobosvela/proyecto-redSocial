@@ -4,7 +4,7 @@
       <div class="row justify-content-center">
         <div class="col-md-4 col-sm-10">
           <div class="card border">
-            <div class="card-header text-center">
+            <div class="custom-fondo card-header text-center">
               <div class="m-3">
                 <i class="ghost fa-solid fa-ghost fa-5x"></i>
               </div>
@@ -64,19 +64,19 @@ export default {};
 }
 
 .ghost {
-  color: rgba(95, 37, 150, 0.822);
+  color: rgba(95, 37, 150);
   transition: 0.5s;
 }
 @keyframes animacionVertical {
   0% {
-    transform: translateY(0); /* Sin desplazamiento vertical */
+    transform: translateY(0);
   }
   100% {
-    transform: translateY(10px); /* Desplazamiento vertical hacia abajo */
+    transform: translateY(10px);
   }
 }
 .ghost:hover {
-  color: rgba(146, 92, 197, 0.842);
+  color: rgba(195, 141, 198);
   animation: animacionVertical 1s infinite alternate;
 }
 
