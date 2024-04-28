@@ -3,47 +3,37 @@
     <div class="container mt-5">
       <div class="row justify-content-center">
         <div class="col-md-4 col-sm-10">
-          <div class="card border border-primary">
+          <div class="card border">
             <div class="card-header text-center">
-              Login
-              <div>
-                <img src="../assets/logo.png" width="80" height="80" alt="" />
+              <div class="m-3">
+                <i class="ghost fa-solid fa-ghost fa-5x"></i>
               </div>
+              <p>¡Bienvenido usuario!</p>
             </div>
             <div class="card-body">
               <form>
                 <div class="mb-3">
-                  <label for="email" class="form-label">Email address</label>
-                  <input
-                    type="email"
-                    class="form-control"
-                    id="email"
-                    aria-describedby="emailHelp"
-                  />
-                  <div id="emailHelp" class="form-text">
-                    We'll never share your email with anyone else.
-                  </div>
+                  <label for="user" class="form-label">Usuario</label>
+                  <input type="text" class="form-control" id="user" />
                 </div>
                 <div class="mb-3">
                   <label for="password" class="form-label">Password</label>
                   <input type="password" class="form-control" id="password" />
                 </div>
-                <div class="mb-3 form-check">
-                  <input
-                    type="checkbox"
-                    class="form-check-input"
-                    id="remember"
-                  />
-                  <label class="form-check-label" for="remember"
-                    >Remember me</label
-                  >
-                </div>
-                <div class="text-center ">
-                  <button class="btn btn-light border border-primary">
-                    <router-link to="/about">About</router-link>
+                <div class="text-center">
+                  <button>
+                    <router-link to="/about" class="custom-link"
+                      >Ingresar</router-link
+                    >
                   </button>
                 </div>
               </form>
+            </div>
+            <div class="card-footer text-center">
+              <p style="margin-bottom: 0px">¿No tienes una cuenta?</p>
+              <router-link to="/about" style="color: blueviolet"
+                >Crea una cuenta</router-link
+              >
             </div>
           </div>
         </div>
@@ -56,4 +46,43 @@
 export default {};
 </script>
 
-<style scoped></style>
+<style scoped>
+.custom-link {
+  text-decoration: none;
+  color: rgba(95, 37, 150);
+  transition: 0.5s;
+  width: 100%;
+  padding-left: 28px;
+  padding-right: 28px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
+.custom-link:hover {
+  text-decoration: none;
+  color: rgb(255, 255, 255);
+}
+
+.ghost {
+  color: rgba(95, 37, 150, 0.822);
+  transition: .5s;
+}
+.ghost:hover {
+  color: rgba(170, 128, 209, 0.842);
+}
+
+button {
+  background-color: #fff;
+  border: 1px solid rgba(95, 37, 150);
+  width: 7.2em;
+  height: 2em;
+  font-size: 17px;
+  border-radius: 0.4em;
+  transition: 0.5s;
+  padding: 0px;
+}
+
+button:hover {
+  background-color: rgba(95, 37, 150);
+}
+</style>
