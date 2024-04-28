@@ -22,7 +22,7 @@
                 </div>
                 <div class="text-center">
                   <button>
-                    <router-link to="/about" class="custom-link"
+                    <router-link to="/main" class="custom-link"
                       >Ingresar</router-link
                     >
                   </button>
@@ -31,7 +31,7 @@
             </div>
             <div class="card-footer text-center">
               <p style="margin-bottom: 0px">¿No tienes una cuenta?</p>
-              <router-link to="/about" style="color: blueviolet"
+              <router-link to="/registro" style="color: blueviolet"
                 >Crea una cuenta</router-link
               >
             </div>
@@ -65,10 +65,19 @@ export default {};
 
 .ghost {
   color: rgba(95, 37, 150, 0.822);
-  transition: .5s;
+  transition: 0.5s;
+}
+@keyframes animacionVertical {
+  0% {
+    transform: translateY(0); /* Sin desplazamiento vertical */
+  }
+  100% {
+    transform: translateY(10px); /* Desplazamiento vertical hacia abajo */
+  }
 }
 .ghost:hover {
-  color: rgba(170, 128, 209, 0.842);
+  color: rgba(146, 92, 197, 0.842);
+  animation: animacionVertical 1s infinite alternate;
 }
 
 button {
