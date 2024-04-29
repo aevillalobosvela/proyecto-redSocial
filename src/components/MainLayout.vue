@@ -6,18 +6,18 @@
     <div class="container-fluid">
       <div class="navbar-collapse d-flex justify-content-between">
         <ul class="navbar-nav  ms-4" >
-          <div class="m-2">
+          <div class="m-2 d-none d-sm-block d-md-none d-lg-block">
             <router-link to="/">
               <i class="ghost fa-solid fa-ghost fa-4x"></i>
             </router-link>
           </div>
         </ul>
-        <ul class="ghost navbar-nav" style="margin-right: 0%;">
-          <div class="m-2">
+        <ul class="ghost navbar-nav " style="margin-right: 0%;">
+          <div class="m-2 d-none d-sm-block d-md-none d-lg-block">
             <h3>Ghost</h3>
           </div>
         </ul>
-        <ul class="navbar-nav mx-auto">
+        <ul class="navbar-nav mx-auto ">
           <nav class="nav-custom">
             <router-link to="/publicaciones"
               ><i class="fa-solid fa-house fa-2x"></i
@@ -32,13 +32,13 @@
         </ul>
 
         <ul class="navbar-nav me-4">
-          <div class="m-2">
+          <div class="m-2 d-none d-sm-block d-md-none d-lg-block">
             <router-link to="/publicar">
               <i class="ghost fa-solid fa-grip fa-3x"></i>
             </router-link>
           </div>
-          <span class="separator"></span>
-          <div class="m-2">
+          <span class="separator d-none d-sm-block d-md-none d-lg-block"></span>
+          <div class="m-2 d-none d-sm-block d-md-none d-lg-block">
             <router-link to="/perfil">
               <i class="ghost fa-regular fa-circle-user fa-3x"></i>
             </router-link>

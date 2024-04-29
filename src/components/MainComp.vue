@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid">
     <div class="row mt-2">
-      <div class="col-3 mb-3">
+      <div class="col-lg-3 mb-3 col-sm-12" >
         <div class="card border">
           <div class="card-header">
             <h2 class="display-6">Usuarios</h2>
@@ -18,11 +18,11 @@
         </div>
       </div>
 
-      <div class="col-6">
+      <div class="col-lg-6 col-sm-12">
         <router-view></router-view>
       </div>
 
-      <div class="col-3">
+      <div class="col-lg-3 col-sm-12">
         <div class="card border">
           <div class="card-header text-center">
             <h2 class="display-6">Mi perfil</h2>
@@ -30,7 +30,7 @@
           <div class="card-body">
             <div class="text-center">
               <img
-                class="m-3"
+                class="m-3 img-fluid"
                 style="border-radius: 15%"
                 src="../assets/perfi.jpg"
                 width="170"
