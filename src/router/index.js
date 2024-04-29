@@ -5,6 +5,7 @@ import RegistroView from '../views/RegistroView.vue'
 import PerfilView from '../views/PerfilView.vue'
 import PublicarView from '../views/PublicarView.vue'
 
+
 const routes = [
   {
     path: '/',
@@ -14,7 +15,8 @@ const routes = [
   {
     path: '/main',
     name: 'main',
-    component: MainView
+    component: MainView,
+    
   },
   {
     path: '/registro',

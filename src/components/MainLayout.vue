@@ -5,7 +5,7 @@
   >
     <div class="container-fluid">
       <div class="navbar-collapse d-flex justify-content-between">
-        <ul class="navbar-nav me-auto ms-4">
+        <ul class="navbar-nav  ms-4" >
           <div class="m-2">
             <router-link to="/">
               <i class="ghost fa-solid fa-ghost fa-4x"></i>
