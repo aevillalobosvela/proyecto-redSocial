@@ -19,12 +19,66 @@
       <div class="col-6">
         <div class="card border p-3">
           <h2 class="display-6">Publicaciones</h2>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus
-            nemo voluptatem, numquam ea commodi saepe minus ut, repellat
-            suscipit similique non, voluptates quis sequi? Debitis omnis at
-            expedita eos dolorem.
-          </p>
+          <div class="card border m-2">
+            <div class="card-header">
+              <div class="row">
+                <div class="col-6">
+                  <h5 style="margin: 0px; margin-top: 5px">Usuario</h5>
+                </div>
+                <div class="col-6 text-end">
+                  <i class="thum fa fa-thumbs-up fa-2x"></i>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <p>
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                Distinctio cum accusantium modi placeat iste est ad at.
+                Delectus, commodi laboriosam officia deleniti mollitia nulla et
+                autem ex nam doloribus labore?
+              </p>
+            </div>
+          </div>
+          <div class="card border m-2">
+            <div class="card-header">
+              <div class="row">
+                <div class="col-6">
+                  <h5 style="margin: 0px; margin-top: 5px">Usuario</h5>
+                </div>
+                <div class="col-6 text-end">
+                  <i class="thum fa fa-thumbs-up fa-2x"></i>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <p>
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                Distinctio cum accusantium modi placeat iste est ad at.
+                Delectus, commodi laboriosam officia deleniti mollitia nulla et
+                autem ex nam doloribus labore?
+              </p>
+            </div>
+          </div>
+          <div class="card border m-2">
+            <div class="card-header">
+              <div class="row">
+                <div class="col-6">
+                  <h5 style="margin: 0px; margin-top: 5px">Usuario</h5>
+                </div>
+                <div class="col-6 text-end">
+                  <i class="thum fa fa-thumbs-up fa-2x"></i>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <p>
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                Distinctio cum accusantium modi placeat iste est ad at.
+                Delectus, commodi laboriosam officia deleniti mollitia nulla et
+                autem ex nam doloribus labore?
+              </p>
+            </div>
+          </div>
         </div>
       </div>
       <div class="col-3">
@@ -65,7 +119,13 @@
 export default {};
 </script>
 
-<style>
+<style scoped>
+.thum {
+  transition: 0.3s;
+}
+.thum:hover {
+  color: var(--sec-color);
+}
 .custom-link {
   text-decoration: none;
   margin-left: 15px;
