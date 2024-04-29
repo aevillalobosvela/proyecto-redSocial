@@ -12,7 +12,11 @@
             </router-link>
           </div>
         </ul>
-
+        <ul class="ghost navbar-nav" style="margin-right: 0%;">
+          <div class="m-2">
+            <h3>Ghost</h3>
+          </div>
+        </ul>
         <ul class="navbar-nav mx-auto">
           <nav class="nav-custom">
             <router-link to="/main"
@@ -27,7 +31,7 @@
           </nav>
         </ul>
 
-        <ul class="navbar-nav ms-auto me-4">
+        <ul class="navbar-nav me-4">
           <div class="m-2">
             <router-link to="/publicar">
               <i class="ghost fa-solid fa-grip fa-3x"></i>
@@ -56,6 +60,7 @@ export default {};
 .ghost {
   color: var(--main-color);
   transition: 0.5s;
+  font-family: "Font Awesome 6 Free";
 }
 @keyframes animacionVertical {
   0% {

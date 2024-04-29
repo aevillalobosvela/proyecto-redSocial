@@ -8,7 +8,7 @@
               <div class="m-3">
                 <i class="ghost fa-solid fa-ghost fa-5x"></i>
               </div>
-              <p style="margin-bottom: 0px;">¡Bienvenido usuario!</p>
+              <p style="margin-bottom: 0px;">¡Bienvenido a Ghost® usuario!</p>
             </div>
             <div class="card-body">
               <form>

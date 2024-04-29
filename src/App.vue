@@ -13,9 +13,9 @@
 .custom-fondo {
   background-image: linear-gradient(
     to bottom,
-    #f5e1f7,
-    #eadef0,
-    #f7f2fb,
+    #f0cbf3,
+    #e0c9ec,
+    #ede1f7,
     #faf9fd,
     #ffffff
   );
