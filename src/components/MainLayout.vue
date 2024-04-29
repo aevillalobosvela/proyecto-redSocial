@@ -19,7 +19,7 @@
         </ul>
         <ul class="navbar-nav mx-auto">
           <nav class="nav-custom">
-            <router-link to="/main"
+            <router-link to="/publicaciones"
               ><i class="fa-solid fa-house fa-2x"></i
             ></router-link>
             <router-link to="/publicar"

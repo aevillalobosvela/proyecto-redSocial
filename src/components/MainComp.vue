@@ -19,7 +19,7 @@
       </div>
 
       <div class="col-6">
-        
+        <router-view></router-view>
       </div>
 
       <div class="col-3">

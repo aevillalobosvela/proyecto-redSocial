@@ -3,8 +3,8 @@ import LoginView from '../views/LoginView.vue'
 import MainView from '../views/MainView.vue'
 import RegistroView from '../views/RegistroView.vue'
 import PerfilView from '../views/PerfilView.vue'
-import PublicarView from '../views/PublicarView.vue'
-
+import PublicacionesComp from '../components/PublicacionesComp.vue'
+import PublicarComp from '../components/PublicarComp.vue'
 
 const routes = [
   {
@@ -16,7 +16,18 @@ const routes = [
     path: '/main',
     name: 'main',
     component: MainView,
-    
+    children: [
+      {
+        path: '/publicaciones',
+        name: 'publicaciones',
+        component: PublicacionesComp
+      },
+      {
+        path: '/publicar',
+        name: 'publicar',
+        component: PublicarComp
+      }
+    ]
   },
   {
     path: '/registro',
@@ -27,11 +38,6 @@ const routes = [
     path: '/perfil',
     name: 'perfil',
     component: PerfilView
-  },
-  {
-    path: '/publicar',
-    name: 'publicar',
-    component: PublicarView
   }
 ]
 

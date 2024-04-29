@@ -22,7 +22,7 @@
                 </div>
                 <div class="text-center">
                   <button>
-                    <router-link to="/main" class="custom-link"
+                    <router-link to="/publicaciones" class="custom-link"
                       >Ingresar</router-link
                     >
                   </button>
@@ -52,10 +52,7 @@ export default {};
   color: rgba(95, 37, 150);
   transition: 0.5s;
   width: 100%;
-  padding-left: 28px;
-  padding-right: 28px;
-  padding-top: 3px;
-  padding-bottom: 3px;
+  margin: 0px;
 }
 
 .custom-link:hover {
