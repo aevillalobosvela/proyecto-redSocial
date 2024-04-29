@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div class="container mt-5">
+    <div class="container">
       <div class="row justify-content-center">
-        <div class="col-md-6 col-sm-10">
+        <div style="margin-bottom: 114px;" class="col-md-6 col-sm-10 mt-5">
           <div class="card border">
             <div class="card-header">
               <div class="row">

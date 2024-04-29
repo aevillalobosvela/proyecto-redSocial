@@ -3,8 +3,8 @@
     <div class="row mt-2">
       <div class="col-3">
         <div class="card border">
-          <div class="card-header">
-            <p>Usuarios</p>
+          <div class="card-header text-center">
+            <h2 class="display-6">Usuarios</h2>
           </div>
           <div class="card-body">
             <p>
@@ -17,8 +17,8 @@
         </div>
       </div>
       <div class="col-6">
-        <div class="card border">
-          <p>Publicaciones</p>
+        <div class="card border p-3">
+          <h2 class="display-6">Publicaciones</h2>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus
             nemo voluptatem, numquam ea commodi saepe minus ut, repellat
@@ -29,16 +29,31 @@
       </div>
       <div class="col-3">
         <div class="card border">
-          <div class="card-header">
-            <p>Mi perfil</p>
+          <div class="card-header text-center">
+            <h2 class="display-6">Mi perfil</h2>
           </div>
           <div class="card-body">
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus
-              nemo voluptatem, numquam ea commodi saepe minus ut, repellat
-              suscipit similique non, voluptates quis sequi? Debitis omnis at
-              expedita eos dolorem.
-            </p>
+            <div class="text-center">
+              <img
+                style="border-radius: 15%"
+                src="../assets/perfi.jpg"
+                width="170"
+                height="170"
+                alt=""
+              />
+              <h5>Nombre completo</h5>
+              <h5><em>Usuario</em></h5>
+            </div>
+            <p><em>Publicaciones:</em> 15</p>
+            <p><em>Contactos:</em> 15</p>
+          </div>
+          <div class="text-center mb-3">
+            <a class="btn btn-light border">
+              <i class="fa fa-door-open fa-lg"></i
+              ><router-link to="/main" class="custom-link"
+                >Cerrar sesion</router-link
+              ></a
+            >
           </div>
         </div>
       </div>
@@ -50,5 +65,16 @@
 export default {};
 </script>
 
-<style scoped>
+<style>
+.custom-link {
+  text-decoration: none;
+  margin-left: 15px;
+  color: black;
+}
+h5 {
+  margin: 15px;
+}
+p {
+  margin-bottom: 3px;
+}
 </style>

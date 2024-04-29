@@ -52,13 +52,6 @@
           ></a>
         </section>
       </div>
-      <div
-        class="text-center text-dark p-3"
-        style="background-color: rgba(0, 0, 0, 0.2)"
-      >
-        © 2024 Copyright:
-        <a class="text-dark" href="https://mdbootstrap.com/">INF 3911 A</a>
-      </div>
     </footer>
   </div>
 </template>

@@ -1,14 +1,14 @@
 <template>
   <div>
-    <div class="container mt-5">
+    <div class="container">
       <div class="row justify-content-center">
-        <div class="col-md-4 col-sm-10">
+        <div class="col-md-4 col-sm-10 mt-5 ">
           <div class="card border">
             <div class="custom-fondo card-header text-center">
               <div class="m-3">
                 <i class="ghost fa-solid fa-ghost fa-5x"></i>
               </div>
-              <p>¡Bienvenido usuario!</p>
+              <p style="margin-bottom: 0px;">¡Bienvenido usuario!</p>
             </div>
             <div class="card-body">
               <form>

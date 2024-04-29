@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="login">
     <LoginComp />
     <FooterLayout/>
   </div>
@@ -15,9 +15,8 @@ export default {
   }
 }
 </script>
-
 <style>
-body {
-    background-image: url('../assets/fondo3.png');
+.login {
+  background-image: url("../assets/f1.png"); 
 }
 </style>

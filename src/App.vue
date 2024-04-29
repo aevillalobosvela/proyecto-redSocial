@@ -13,8 +13,8 @@
 .custom-fondo {
   background-image: linear-gradient(
     to bottom,
-    #f3e4f4,
-    #f4ebf8,
+    #f5e1f7,
+    #eadef0,
     #f7f2fb,
     #faf9fd,
     #ffffff

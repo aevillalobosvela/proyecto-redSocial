@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <MainLayout/>
-    <MainComp/>
+  <div class="main">
+    <MainLayout />
+    <MainComp />
   </div>
 </template>
 
@@ -11,13 +11,12 @@ import MainLayout from "@/components/MainLayout.vue";
 export default {
   components: {
     MainComp,
-    MainLayout
-  }
-}
+    MainLayout,
+  },
+};
 </script>
-
 <style>
-body {
-    background-image: url('../assets/fondo3.png');
+.main {
+  background-image: url("../assets/f3.png");
 }
 </style>
