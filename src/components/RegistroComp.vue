@@ -2,7 +2,7 @@
   <div>
     <div class="container">
       <div class="row justify-content-center">
-        <div style="margin-bottom: 114px;" class="col-md-6 col-sm-10 mt-5">
+        <div style="margin-bottom: 114px" class="col-md-6 col-sm-10 mt-5">
           <div class="card border">
             <div class="card-header">
               <div class="row">
@@ -16,47 +16,87 @@
               </div>
             </div>
             <div class="card-body">
-              <form>
+              <form @submit.prevent="register">
                 <div class="row">
                   <div class="col-6 mb-3">
                     <label for="nombre" class="form-label">Nombre(s)</label>
-                    <input type="text" class="form-control" id="nombre" />
+                    <input
+                      type="text"
+                      v-model="nombre"
+                      class="form-control"
+                      id="nombre"
+                      required
+                    />
                   </div>
                   <div class="col-6 mb-3">
                     <label for="apellido" class="form-label">Apellidos</label>
-                    <input type="text" class="form-control" id="apellido" />
+                    <input
+                      type="text"
+                      v-model="apellido"
+                      class="form-control"
+                      id="apellido"
+                      required
+                    />
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-6 mb-3">
                     <label for="user" class="form-label">Usuario</label>
-                    <input type="text" class="form-control" id="user" />
+                    <input
+                      type="text"
+                      v-model="username"
+                      class="form-control"
+                      id="user"
+                      required
+                    />
                   </div>
                   <div class="col-6 mb-3">
                     <label for="nac" class="form-label"
                       >Fecha de nacimiento</label
                     >
-                    <input type="date" class="form-control" id="nac" />
+                    <input
+                      type="date"
+                      v-model="fecnac"
+                      class="form-control"
+                      id="fecnac"
+                      required
+                    />
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-6 mb-3">
                     <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password" />
+                    <input
+                      type="password"
+                      v-model="password"
+                      class="form-control"
+                      id="password"
+                      required
+                    />
                   </div>
                   <div class="col-6 mb-3">
-                    <label for="reppassword" class="form-label">Repetir Password</label>
-                    <input type="password" class="form-control" id="reppassword" />
+                    <label for="reppassword" class="form-label"
+                      >Repetir Password</label
+                    >
+                    <input
+                      type="password"
+                      v-model="reppassword"
+                      class="form-control"
+                      id="reppassword"
+                      required
+                    />
                   </div>
                 </div>
-
                 <div class="row">
                   <div class="col-6 text-end">
-                    <button>
+                    <div class="">
+                      <button type="submit">Registrarse</button>
+                    </div>
+                    <!-- <button>
                       <router-link to="/" class="custom-link"
                         >Si, registrarme</router-link
                       >
-                    </button>
+                    </button> -->
                   </div>
                   <div class="col-6">
                     <button class="button2">
@@ -79,9 +119,43 @@
     </div>
   </div>
 </template>
+
 <script>
-export default {};
+import { mapActions } from "vuex";
+export default {
+  data() {
+    return {
+      nombre: "",
+      apellido: "",
+      username: "",
+      fecnac: "",
+      password: "",
+      reppassword: "",
+    };
+  },
+  methods: {
+    ...mapActions(["registerUser"]),
+    register() {
+      this.registerUser({
+        nombre: this.nombre,
+        apellido: this.apellido,
+        username: this.username,
+        fecnac: this.fecnac,
+        password: this.password,
+        reppassword: this.reppassword,
+      });
+      // Limpiar campos después del registro
+      this.nombre = "";
+      this.apellido = "";
+      this.username = "";
+      this.fecnac = "";
+      this.password = "";
+      this.reppassword = "";
+    },
+  },
+};
 </script>
+
 <style scoped>
 .custom-link {
   text-decoration: none;

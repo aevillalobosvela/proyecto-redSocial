@@ -2,30 +2,43 @@
   <div>
     <div class="container">
       <div class="row justify-content-center">
-        <div class="col-md-4 col-sm-10 mt-5 ">
+        <div class="col-md-4 col-sm-10 mt-5">
           <div class="card border">
             <div class="custom-fondo card-header text-center">
               <div class="m-3">
                 <i class="ghost fa-solid fa-ghost fa-5x"></i>
               </div>
-              <p style="margin-bottom: 0px;">¡Bienvenido a Ghost® usuario!</p>
+              <p style="margin-bottom: 0px">¡Bienvenido a Ghost® usuario!</p>
             </div>
             <div class="card-body">
-              <form>
+              <form @submit.prevent="login">
                 <div class="mb-3">
                   <label for="user" class="form-label">Usuario</label>
-                  <input type="text" class="form-control" id="user" />
+                  <input
+                    type="text"
+                    v-model="username"
+                    class="form-control"
+                    id="user"
+                    required
+                  />
                 </div>
                 <div class="mb-3">
                   <label for="password" class="form-label">Password</label>
-                  <input type="password" class="form-control" id="password" />
+                  <input
+                    type="password"
+                    v-model="password"
+                    class="form-control"
+                    id="password"
+                    required
+                  />
                 </div>
                 <div class="text-center">
-                  <button>
+                  <button type="submit">Iniciar sesion</button>
+                  <!-- <button>
                     <router-link to="/publicaciones" class="custom-link"
                       >Ingresar</router-link
                     >
-                  </button>
+                  </button> -->
                 </div>
               </form>
             </div>
@@ -43,7 +56,28 @@
 </template>
 
 <script>
-export default {};
+import { mapActions } from "vuex";
+
+export default {
+  data() {
+    return {
+      username: "",
+      password: "",
+    };
+  },
+  methods: {
+    ...mapActions(["loginUser"]),
+    async login() {
+      const loginSuccessful = await this.loginUser({
+        username: this.username,
+        password: this.password,
+      });
+      if (loginSuccessful) {
+        this.$router.push("/publicaciones");
+      }
+    },
+  },
+};
 </script>
 
 <style scoped>
