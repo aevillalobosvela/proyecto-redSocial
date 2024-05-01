@@ -62,7 +62,7 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-7 col-sm-12 my-2">
+      <div class="col-lg-7 col-sm-12 mt-3 mb-2">
         <div class="card border p-3">
           <h2 class="display-6">Mis publicaciones</h2>
           <div class="card-body" style="max-height: 420px; overflow-y: auto">
@@ -79,7 +79,10 @@
                         <small>4 de abril</small>
                       </p>
                     </div>
-                    <div class="col-6 text-end">
+                    <div style="display: flex; justify-content: end;" class="col-6 text-end">
+                      <p style="margin: 4px;">
+                        <small>15</small>
+                      </p>
                       <i class="mt-2 thum fa fa-thumbs-up fa-2x"></i>
                     </div>
                   </div>
