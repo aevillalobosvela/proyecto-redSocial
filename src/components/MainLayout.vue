@@ -7,7 +7,7 @@
       <div class="navbar-collapse d-flex justify-content-between">
         <ul class="navbar-nav  ms-4" >
           <div class="m-2 d-none d-sm-block d-md-none d-lg-block">
-            <router-link to="/">
+            <router-link to="/publicaciones">
               <i class="ghost fa-solid fa-ghost fa-4x"></i>
             </router-link>
           </div>

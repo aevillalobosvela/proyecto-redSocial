@@ -1,14 +1,17 @@
 import { createStore } from "vuex";
-import Swal from "sweetalert2";
 
 export default createStore({
   state: {
     users: [],
+    usuario: "",
   },
   getters: {},
   mutations: {
     registerUser(state, newUser) {
       state.users.push(newUser);
+    },
+    ingresoUser(state, newUser) {
+      state.usuario = newUser;
     },
   },
   actions: {
@@ -17,34 +20,17 @@ export default createStore({
         (user) => user.username === newUser.username
       );
       const nopass = newUser.password !== newUser.reppassword;
-      console.log(nopass);
       if (existingUser) {
-        Swal.fire({
-          title: "Que mal :(",
-          text: "El nombre de usuario ya está en uso",
-          icon: "warning",
-        });
-        return;
+        return "El nombre de usuario ya está en uso";
+      } else if (nopass) {
+        return "Las contraseñas no coinciden";
+      } else {
+        commit("registerUser", newUser);
+        return "exito";
       }
-
-      if (nopass) {
-        Swal.fire({
-          title: "Lo siento :(",
-          text: "Las contraseñas no coinciden",
-          icon: "warning",
-        });
-        return;
-      }
-
-      commit("registerUser", newUser);
-      Swal.fire({
-        title: "¡Genial!",
-        text: "Usuario registrado correctamente",
-        icon: "success",
-      });
     },
-    async loginUser({ state }, credentials) {
-      // Buscar el usuario en el array
+
+    async loginUser({ commit, state }, credentials) {
       const user = state.users.find(
         (user) =>
           user.username === credentials.username &&
@@ -52,19 +38,10 @@ export default createStore({
       );
       return new Promise((resolve) => {
         if (user) {
-          Swal.fire({
-            title: "¡Genial!",
-            text: "Bienvenido usuario",
-            icon: "success",
-          });
-          resolve(true); 
+          commit("ingresoUser", user);
+          resolve(true);
         } else {
-          Swal.fire({
-            title: "Que mal :(",
-            text: "Nombre de usuario o contraseña incorrectos",
-            icon: "error",
-          });
-          resolve(false); 
+          resolve(false);
         }
       });
     },

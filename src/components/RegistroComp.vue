@@ -122,6 +122,7 @@
 
 <script>
 import { mapActions } from "vuex";
+import Swal from "sweetalert2";
 export default {
   data() {
     return {
@@ -135,8 +136,8 @@ export default {
   },
   methods: {
     ...mapActions(["registerUser"]),
-    register() {
-      this.registerUser({
+    async register() {
+      const msg = await this.registerUser({
         nombre: this.nombre,
         apellido: this.apellido,
         username: this.username,
@@ -144,7 +145,22 @@ export default {
         password: this.password,
         reppassword: this.reppassword,
       });
-      // Limpiar campos después del registro
+
+      if (msg == "exito") {
+        Swal.fire({
+          title: "¡Genial!",
+          text: "Usuario registrado correctamente",
+          icon: "success",
+        });
+        this.$router.push("/");
+      } else {
+        Swal.fire({
+          title: "Lo siento :(",
+          text: msg,
+          icon: "warning",
+        });
+      }
+
       this.nombre = "";
       this.apellido = "";
       this.username = "";

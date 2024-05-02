@@ -57,7 +57,7 @@
 
 <script>
 import { mapActions } from "vuex";
-
+import Swal from "sweetalert2";
 export default {
   data() {
     return {
@@ -73,7 +73,18 @@ export default {
         password: this.password,
       });
       if (loginSuccessful) {
+        Swal.fire({
+          title: "¡Genial!",
+          text: "Bienvenido usuario",
+          icon: "success",
+        });
         this.$router.push("/publicaciones");
+      } else {
+        Swal.fire({
+          title: "Que mal :(",
+          text: "Nombre de usuario o contraseña incorrectos",
+          icon: "error",
+        });
       }
     },
   },
