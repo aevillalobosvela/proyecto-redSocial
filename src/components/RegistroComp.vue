@@ -87,6 +87,18 @@
                     />
                   </div>
                 </div>
+                <div class="row mb-3">
+                  <div class="col-12">
+                    <label for="image" class="form-label">Foto de perfil</label>
+                    <input
+                      type="file"
+                      class="form-control"
+                      @change="handleFileUpload"
+                      accept="image/*"
+                      required
+                    />
+                  </div>
+                </div>
                 <div class="row">
                   <div class="col-6 text-end">
                     <div class="">
@@ -132,10 +144,16 @@ export default {
       fecnac: "",
       password: "",
       reppassword: "",
+      imagen: null,
     };
   },
   methods: {
     ...mapActions(["registerUser"]),
+
+    handleFileUpload(event) {
+      const file = event.target.files[0];
+      this.imagen = file;
+    },
     async register() {
       const msg = await this.registerUser({
         nombre: this.nombre,
@@ -144,6 +162,7 @@ export default {
         fecnac: this.fecnac,
         password: this.password,
         reppassword: this.reppassword,
+        imagen: this.imagen,
       });
 
       if (msg == "exito") {
@@ -167,6 +186,7 @@ export default {
       this.fecnac = "";
       this.password = "";
       this.reppassword = "";
+      this.imagen = null;
     },
   },
 };

@@ -1,8 +1,8 @@
 import { createStore } from "vuex";
-
+import usuarios from '../usuarios.js';
 export default createStore({
   state: {
-    users: [],
+    users: usuarios,
     usuario: "",
   },
   getters: {},
@@ -26,6 +26,7 @@ export default createStore({
         return "Las contraseñas no coinciden";
       } else {
         commit("registerUser", newUser);
+        console.log(state.users);
         return "exito";
       }
     },

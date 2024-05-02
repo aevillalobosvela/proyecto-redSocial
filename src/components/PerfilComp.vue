@@ -17,8 +17,8 @@
                 class="img-fluid my-5"
                 style="border-radius: 15%; width: 170px"
               />
-              <h5>Marie Horwitz</h5>
-              <p>Web Designer</p>
+              <h5>{{ usuario.nombre }} {{ usuario.apellido }}</h5>
+              <p>{{ usuario.username }}</p>
               <i class="far fa-edit mb-5"></i>
             </div>
             <div class="col-md-8">
@@ -28,21 +28,21 @@
                 <div class="row pt-1">
                   <div class="col-6 mb-3">
                     <h6>Nombre(s)</h6>
-                    <p class="text-muted">Nombres de ejemplo</p>
+                    <p class="text-muted">{{ usuario.nombre }}</p>
                   </div>
                   <div class="col-6 mb-3">
                     <h6>Apellidos</h6>
-                    <p class="text-muted">Apellidos de ejemplo</p>
+                    <p class="text-muted">{{ usuario.apellido }}</p>
                   </div>
                 </div>
                 <div class="row pt-1">
                   <div class="col-6 mb-3">
                     <h6>Usuario</h6>
-                    <p class="text-muted">Usuario</p>
+                    <p class="text-muted">{{ usuario.username }}</p>
                   </div>
                   <div class="col-6 mb-3">
                     <h6>Fec. de nacimiento</h6>
-                    <p class="text-muted">11/11/11</p>
+                    <p class="text-muted">{{ usuario.fecnac }}</p>
                   </div>
                 </div>
                 <h6>Interaccion</h6>
@@ -79,8 +79,11 @@
                         <small>4 de abril</small>
                       </p>
                     </div>
-                    <div style="display: flex; justify-content: end;" class="col-6 text-end">
-                      <p style="margin: 4px;">
+                    <div
+                      style="display: flex; justify-content: end"
+                      class="col-6 text-end"
+                    >
+                      <p style="margin: 4px">
                         <small>15</small>
                       </p>
                       <i class="mt-2 thum fa fa-thumbs-up fa-2x"></i>
@@ -137,9 +140,16 @@
     </div>
   </div>
 </template>
+
 <script>
-export default {};
+import { mapState } from "vuex";
+export default {
+  computed: {
+    ...mapState(["usuario"]),
+  },
+};
 </script>
+
 <style>
 .thum {
   transition: 0.3s;
