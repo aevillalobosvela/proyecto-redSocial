@@ -12,13 +12,13 @@
               "
             >
               <img
-                src="../assets/perfi.jpg"
+                :src="userImage"
                 alt="Avatar"
                 class="img-fluid my-5"
                 style="border-radius: 15%; width: 170px"
               />
-              <h5>{{ usuario.nombre }} {{ usuario.apellido }}</h5>
-              <p>{{ usuario.username }}</p>
+              <h5>{{ usuario.datos.nombre }} {{ usuario.datos.apellido }}</h5>
+              <p>{{ usuario.datos.username }}</p>
               <i class="far fa-edit mb-5"></i>
             </div>
             <div class="col-md-8">
@@ -28,21 +28,23 @@
                 <div class="row pt-1">
                   <div class="col-6 mb-3">
                     <h6>Nombre(s)</h6>
-                    <p class="text-muted">{{ usuario.nombre }}</p>
+                    <p class="text-muted">{{ usuario.datos.nombre }}</p>
                   </div>
                   <div class="col-6 mb-3">
                     <h6>Apellidos</h6>
-                    <p class="text-muted">{{ usuario.apellido }}</p>
+                    <p class="text-muted">{{ usuario.datos.apellido }}</p>
                   </div>
                 </div>
                 <div class="row pt-1">
                   <div class="col-6 mb-3">
                     <h6>Usuario</h6>
-                    <p class="text-muted">{{ usuario.username }}</p>
+                    <p class="text-muted">{{ usuario.datos.username }}</p>
                   </div>
                   <div class="col-6 mb-3">
                     <h6>Fec. de nacimiento</h6>
-                    <p class="text-muted">{{ usuario.fecnac }}</p>
+                    <p class="text-muted">
+                      {{ formatDate(usuario.datos.fecnac) }}
+                    </p>
                   </div>
                 </div>
                 <h6>Interaccion</h6>
@@ -143,9 +145,20 @@
 
 <script>
 import { mapState } from "vuex";
+import { mapGetters } from "vuex";
 export default {
+  methods: {
+    formatDate(dateString) {
+      const date = new Date(dateString);
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, "0");
+      const day = String(date.getDate()).padStart(2, "0");
+      return `${year}-${month}-${day}`;
+    },
+  },
   computed: {
     ...mapState(["usuario"]),
+    ...mapGetters(["userImage"]),
   },
 };
 </script>

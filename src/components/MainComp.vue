@@ -8,12 +8,12 @@
           </div>
           <div class="card-body" style="max-height: 435px; overflow-y: auto">
             <div v-for="(user, index) in users" :key="index">
-              <div class="row border  mb-3" >
+              <div class="row border mb-3">
                 <div class="col-4">
                   <img
-                    class="img-fluid m-2 "
+                    class="img-fluid m-2"
                     style="border-radius: 50%"
-                    :src="user.imagen"
+                    :src="userImages[index]" 
                     width="60"
                     height="60"
                     alt="Imagen de perfil del usuario"
@@ -42,17 +42,18 @@
           </div>
           <div class="card-body">
             <div class="text-center">
-<!--               <img
+              <img
                 class="m-2 img-fluid"
                 style="border-radius: 15%"
-                :src="usuario.data[0].imagen"
+                :src="userImage"
+                alt="User Image"
                 width="180"
                 height="180"
-                alt="Imagen de perfil del usuario"
-              /> -->
-              <h5>{{ usuario.data.nombre }} {{ usuario.data.apellido }}</h5>
+                v-if="userImage"
+              />
+              <h5>{{ usuario.datos.nombre }} {{ usuario.datos.apellido }}</h5>
               <h5>
-                <em>{{ usuario.data.username }}</em>
+                <em>{{ usuario.datos.username }}</em>
               </h5>
             </div>
             <p><em>Publicaciones:</em> 15</p>
@@ -73,13 +74,20 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapActions, mapGetters } from "vuex";
 export default {
   computed: {
     ...mapState(["usuario", "users"]),
+    ...mapGetters(["userImage", "userImages"]),
   },
   data() {
     return {};
+  },
+  methods: {
+    ...mapActions(["fetchUsers"]),
+  },
+  mounted() {
+    this.fetchUsers(); // Obtener los usuarios cuando el componente se monta
   },
 };
 </script>

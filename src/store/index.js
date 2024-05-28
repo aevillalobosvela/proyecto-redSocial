@@ -1,13 +1,35 @@
 import { createStore } from "vuex";
-import usuarios from '../usuarios.js';
-import createPersistedState from 'vuex-persistedstate';
+import services from "../services";
 
 export default createStore({
   state: {
-    users: usuarios,
+    users: [],
     usuario: null,
   },
-  getters: {},
+  getters: {
+    userImage(state) {
+      if (state.usuario && state.usuario.datos.imagen) {
+        return URL.createObjectURL(
+          new Blob([new Uint8Array(state.usuario.datos.imagen.data)], {
+            type: "image/jpeg",
+          })
+        );
+      }
+      return null;
+    },
+    userImages(state) {
+      return state.users.map(user => {
+        if (user.imagen) {
+          return URL.createObjectURL(
+            new Blob([new Uint8Array(user.imagen.data)], {
+              type: "image/jpeg",
+            })
+          );
+        }
+        return null;
+      });
+    },
+  },
   mutations: {
     registerUser(state, newUser) {
       state.users.push(newUser);
@@ -17,6 +39,9 @@ export default createStore({
     },
     clearUser(state) {
       state.usuario = null;
+    },
+    setUsers(state, userData) {
+      state.users = userData.datos;
     },
   },
   actions: {
@@ -35,6 +60,15 @@ export default createStore({
         return "exito";
       }
     },
+    async fetchUsers({ commit }) {
+      try {
+        const response = await services.auth.getAllUsers();
+        commit("setUsers", response.data);
+        console.log(response.data)
+      } catch (error) {
+        console.error("Fetch users error:", error);
+        throw error;
+      }
+    },
   },
-  plugins: [createPersistedState()],
 });

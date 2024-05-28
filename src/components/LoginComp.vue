@@ -78,6 +78,7 @@ export default {
           icon: "success",
         });
         this.$store.commit('setUserData', response.data);
+        console.log(response.data);
         this.$router.push("/publicaciones");
       } catch (error) {
         console.error("Login failed:");
