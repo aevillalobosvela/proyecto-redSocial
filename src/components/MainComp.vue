@@ -8,7 +8,7 @@
           </div>
           <div class="card-body" style="max-height: 435px; overflow-y: auto">
             <div v-for="(user, index) in users" :key="index">
-              <div class="row border  mb-3">
+              <div class="row border  mb-3" >
                 <div class="col-4">
                   <img
                     class="img-fluid m-2 "
@@ -42,17 +42,17 @@
           </div>
           <div class="card-body">
             <div class="text-center">
-              <img
+<!--               <img
                 class="m-2 img-fluid"
                 style="border-radius: 15%"
-                :src="usuario.imagen"
+                :src="usuario.data[0].imagen"
                 width="180"
                 height="180"
                 alt="Imagen de perfil del usuario"
-              />
-              <h5>{{ usuario.nombre }} {{ usuario.apellido }}</h5>
+              /> -->
+              <h5>{{ usuario.data.nombre }} {{ usuario.data.apellido }}</h5>
               <h5>
-                <em>{{ usuario.username }}</em>
+                <em>{{ usuario.data.username }}</em>
               </h5>
             </div>
             <p><em>Publicaciones:</em> 15</p>

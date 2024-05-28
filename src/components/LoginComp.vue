@@ -11,7 +11,7 @@
               <p style="margin-bottom: 0px">¡Bienvenido a Ghost® usuario!</p>
             </div>
             <div class="card-body">
-              <form @submit.prevent="login">
+              <form @submit.prevent="enviar">
                 <div class="mb-3">
                   <label for="user" class="form-label">Usuario</label>
                   <input
@@ -33,7 +33,7 @@
                   />
                 </div>
                 <div class="text-center">
-                  <button type="submit">Iniciar sesion</button>
+                  <button type="submit" class="btn">Iniciar sesion</button>
                   <!-- <button>
                     <router-link to="/publicaciones" class="custom-link"
                       >Ingresar</router-link
@@ -56,17 +56,40 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+/* import { mapActions } from "vuex"; */
 import Swal from "sweetalert2";
 export default {
   data() {
     return {
-      username: "",
-      password: "",
+      username: null,
+      password: null,
     };
   },
   methods: {
-    ...mapActions(["loginUser"]),
+    async enviar() {
+      try {
+        const response = await this.$services.auth.login({
+          username: this.username,
+          password: this.password,
+        });
+        Swal.fire({
+          title: "¡Genial!",
+          text: "Bienvenido usuario",
+          icon: "success",
+        });
+        this.$store.commit('setUserData', response.data);
+        this.$router.push("/publicaciones");
+      } catch (error) {
+        console.error("Login failed:");
+        Swal.fire({
+          title: "Que mal :(",
+          text: "Nombre de usuario o contraseña incorrectos",
+          icon: "error",
+        });
+      }
+    },
+
+    /* ...mapActions(["loginUser"]),
     async login() {
       const loginSuccessful = await this.loginUser({
         username: this.username,
@@ -86,7 +109,7 @@ export default {
           icon: "error",
         });
       }
-    },
+    }, */
   },
 };
 </script>

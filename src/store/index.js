@@ -1,17 +1,22 @@
 import { createStore } from "vuex";
 import usuarios from '../usuarios.js';
+import createPersistedState from 'vuex-persistedstate';
+
 export default createStore({
   state: {
     users: usuarios,
-    usuario: "",
+    usuario: null,
   },
   getters: {},
   mutations: {
     registerUser(state, newUser) {
       state.users.push(newUser);
     },
-    ingresoUser(state, newUser) {
-      state.usuario = newUser;
+    setUserData(state, userData) {
+      state.usuario = userData;
+    },
+    clearUser(state) {
+      state.usuario = null;
     },
   },
   actions: {
@@ -30,22 +35,6 @@ export default createStore({
         return "exito";
       }
     },
-
-    async loginUser({ commit, state }, credentials) {
-      const user = state.users.find(
-        (user) =>
-          user.username === credentials.username &&
-          user.password === credentials.password
-      );
-      return new Promise((resolve) => {
-        if (user) {
-          commit("ingresoUser", user);
-          resolve(true);
-        } else {
-          resolve(false);
-        }
-      });
-    },
   },
-  modules: {},
+  plugins: [createPersistedState()],
 });
