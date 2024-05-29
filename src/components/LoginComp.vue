@@ -34,11 +34,6 @@
                 </div>
                 <div class="text-center">
                   <button type="submit" class="btn">Iniciar sesion</button>
-                  <!-- <button>
-                    <router-link to="/publicaciones" class="custom-link"
-                      >Ingresar</router-link
-                    >
-                  </button> -->
                 </div>
               </form>
             </div>
@@ -89,28 +84,6 @@ export default {
         });
       }
     },
-
-    /* ...mapActions(["loginUser"]),
-    async login() {
-      const loginSuccessful = await this.loginUser({
-        username: this.username,
-        password: this.password,
-      });
-      if (loginSuccessful) {
-        Swal.fire({
-          title: "¡Genial!",
-          text: "Bienvenido usuario",
-          icon: "success",
-        });
-        this.$router.push("/publicaciones");
-      } else {
-        Swal.fire({
-          title: "Que mal :(",
-          text: "Nombre de usuario o contraseña incorrectos",
-          icon: "error",
-        });
-      }
-    }, */
   },
 };
 </script>

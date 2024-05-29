@@ -6,5 +6,8 @@ export default function createAuthService(axios, baseURL) {
     getAllUsers() {
       return axios.get(`${baseURL}usuario/lista`);
     },
+    registrarUsuario(datos) {
+      return axios.put(`${baseURL}usuario/insertar`, datos);
+    },
   };
 }

@@ -16,7 +16,7 @@
               </div>
             </div>
             <div class="card-body">
-              <form @submit.prevent="register">
+              <form @submit.prevent="registrar">
                 <div class="row">
                   <div class="col-6 mb-3">
                     <label for="nombre" class="form-label">Nombre(s)</label>
@@ -95,7 +95,7 @@
                       class="form-control"
                       @change="handleFileUpload"
                       accept="image/*"
-                      required
+           
                     />
                   </div>
                 </div>
@@ -104,11 +104,6 @@
                     <div class="">
                       <button type="submit">Registrarse</button>
                     </div>
-                    <!-- <button>
-                      <router-link to="/" class="custom-link"
-                        >Si, registrarme</router-link
-                      >
-                    </button> -->
                   </div>
                   <div class="col-6">
                     <button class="button2">
@@ -133,7 +128,7 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+/* import { mapActions } from "vuex"; */
 import Swal from "sweetalert2";
 export default {
   data() {
@@ -148,45 +143,50 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["registerUser"]),
-
     handleFileUpload(event) {
       const file = event.target.files[0];
-      this.imagen = file;
-    },
-    async register() {
-      const msg = await this.registerUser({
-        nombre: this.nombre,
-        apellido: this.apellido,
-        username: this.username,
-        fecnac: this.fecnac,
-        password: this.password,
-        reppassword: this.reppassword,
-        imagen: this.imagen,
-      });
 
-      if (msg == "exito") {
+      if (file) {
+        const reader = new FileReader();
+
+        reader.onload = (event) => {
+          // Cambiar a función de flecha
+          const arrayBuffer = event.target.result;
+          const uint8Array = new Uint8Array(arrayBuffer);
+          this.imagen = Array.from(uint8Array); // `this` ahora apunta al componente Vue
+        };
+
+        reader.readAsArrayBuffer(file);
+      } else {
+        console.error("No se ha seleccionado ningún archivo.");
+      }
+    },
+
+    async registrar() {
+      try {
+        const response = await this.$services.auth.registrarUsuario({
+          nombre: this.nombre,
+          apellido: this.apellido,
+          username: this.username,
+          fecnac: this.fecnac,
+          password: this.password,
+          imagen: null,
+        });
         Swal.fire({
           title: "¡Genial!",
           text: "Usuario registrado correctamente",
           icon: "success",
         });
         this.$router.push("/");
-      } else {
+        console.log(response.data);
+      } catch (error) {
+        console.error("Login failed:");
         Swal.fire({
           title: "Lo siento :(",
-          text: msg,
+          text: "Error en el registro",
           icon: "warning",
         });
       }
-
-      this.nombre = "";
-      this.apellido = "";
-      this.username = "";
-      this.fecnac = "";
-      this.password = "";
-      this.reppassword = "";
-      this.imagen = null;
     },
   },
 };

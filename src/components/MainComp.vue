@@ -6,14 +6,24 @@
           <div class="card-header">
             <h2 class="display-6">Usuarios</h2>
           </div>
-          <div class="card-body" style="max-height: 435px; overflow-y: auto">
+          <div class="card-body" style="max-height: 420px; overflow-y: auto">
             <div v-for="(user, index) in users" :key="index">
               <div class="row border mb-3">
                 <div class="col-4">
                   <img
+                    v-if="userImages[index]"
                     class="img-fluid m-2"
                     style="border-radius: 50%"
-                    :src="userImages[index]" 
+                    :src="userImages[index]"
+                    width="60"
+                    height="60"
+                    alt="Imagen de perfil del usuario"
+                  />
+                  <img
+                    v-else
+                    class="img-fluid m-2"
+                    style="border-radius: 50%"
+                    src="../assets/avatar.png"
                     width="60"
                     height="60"
                     alt="Imagen de perfil del usuario"
@@ -43,13 +53,22 @@
           <div class="card-body">
             <div class="text-center">
               <img
+                v-if="userImage"
                 class="m-2 img-fluid"
                 style="border-radius: 15%"
                 :src="userImage"
                 alt="User Image"
                 width="180"
                 height="180"
-                v-if="userImage"
+              />
+              <img
+                v-else
+                class="m-2 img-fluid"
+                style="border-radius: 15%"
+                src="../assets/avatar.png"
+                alt="User Image"
+                width="180"
+                height="180"
               />
               <h5>{{ usuario.datos.nombre }} {{ usuario.datos.apellido }}</h5>
               <h5>

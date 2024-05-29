@@ -12,7 +12,15 @@
               "
             >
               <img
+                v-if="userImage"
                 :src="userImage"
+                alt="Avatar"
+                class="img-fluid my-5"
+                style="border-radius: 15%; width: 170px"
+              />
+              <img
+                v-else
+                src="../assets/avatar.png"
                 alt="Avatar"
                 class="img-fluid my-5"
                 style="border-radius: 15%; width: 170px"
