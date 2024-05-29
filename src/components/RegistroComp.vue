@@ -25,6 +25,7 @@
                       v-model="nombre"
                       class="form-control"
                       id="nombre"
+                      @input="nomcomp"
                       required
                     />
                   </div>
@@ -35,6 +36,7 @@
                       v-model="apellido"
                       class="form-control"
                       id="apellido"
+                      @input="apecomp"
                       required
                     />
                   </div>
@@ -95,7 +97,6 @@
                       class="form-control"
                       @change="handleFileUpload"
                       accept="image/*"
-           
                     />
                   </div>
                 </div>
@@ -143,6 +144,13 @@ export default {
     };
   },
   methods: {
+    nomcomp() {
+      this.nombre = this.nombre.replace(/[^a-zA-Z]/g, "");
+    },
+    apecomp() {
+      this.apellido = this.apellido.replace(/[^a-zA-Z]/g, "");
+    },
+
     handleFileUpload(event) {
       const file = event.target.files[0];
 
@@ -163,8 +171,9 @@ export default {
     },
 
     async registrar() {
+      var respuesta = "";
       try {
-        const response = await this.$services.auth.registrarUsuario({
+        respuesta = await this.$services.auth.registrarUsuario({
           nombre: this.nombre,
           apellido: this.apellido,
           username: this.username,
@@ -172,15 +181,21 @@ export default {
           password: this.password,
           imagen: null,
         });
-        Swal.fire({
-          title: "¡Genial!",
-          text: "Usuario registrado correctamente",
-          icon: "success",
-        });
-        this.$router.push("/");
-        console.log(response.data);
+        if (respuesta.data.success === 1) {
+          Swal.fire({
+            title: "¡Genial!",
+            text: "Usuario registrado correctamente",
+            icon: "success",
+          });
+          this.$router.push("/");
+        } else {
+          Swal.fire({
+            title: "Lo siento :(",
+            text: respuesta.data.error,
+            icon: "warning",
+          });
+        }
       } catch (error) {
-        console.error("Login failed:");
         Swal.fire({
           title: "Lo siento :(",
           text: "Error en el registro",
