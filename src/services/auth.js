@@ -1,13 +1,19 @@
 export default function createAuthService(axios, baseURL) {
   return {
     login(credenciales) {
-      return axios.post(`${baseURL}usuario/login`, credenciales);
+      return axios.post(`${baseURL}login`, credenciales);
     },
     getAllUsers() {
-      return axios.get(`${baseURL}usuario/lista`);
+      return axios.get(`${baseURL}lista`);
     },
     registrarUsuario(datos) {
-      return axios.put(`${baseURL}usuario/insertar`, datos);
+      return axios.put(`${baseURL}insertar`, datos);
+    },
+    recuperarPubs() {
+      return axios.get(`${baseURL}plista`);
+    },
+    publicar(datos) {
+      return axios.put(`${baseURL}pinsertar`, datos);
     },
   };
 }

@@ -81,7 +81,7 @@
           <div class="text-center mb-3">
             <a class="btn btn-light border">
               <i class="fa fa-door-open fa-lg"></i
-              ><router-link to="/main" class="custom-link"
+              ><router-link to="/" class="custom-link"
                 >Cerrar sesion</router-link
               ></a
             >

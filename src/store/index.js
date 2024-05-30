@@ -5,6 +5,7 @@ export default createStore({
   state: {
     users: [],
     usuario: null,
+    publicaciones: [],
   },
   getters: {
     userImage(state) {
@@ -18,7 +19,7 @@ export default createStore({
       return null;
     },
     userImages(state) {
-      return state.users.map(user => {
+      return state.users.map((user) => {
         if (user.imagen) {
           return URL.createObjectURL(
             new Blob([new Uint8Array(user.imagen.data)], {
@@ -43,6 +44,9 @@ export default createStore({
     setUsers(state, userData) {
       state.users = userData.datos;
     },
+    setPubs(state, userData) {
+      state.publicaciones = userData.datos;
+    },
   },
   actions: {
     registerUser({ commit, state }, newUser) {
@@ -64,9 +68,17 @@ export default createStore({
       try {
         const response = await services.auth.getAllUsers();
         commit("setUsers", response.data);
-        console.log(response.data)
       } catch (error) {
         console.error("Fetch users error:", error);
+        throw error;
+      }
+    },
+    async recuperarPubs({ commit }) {
+      try {
+        const response = await services.auth.recuperarPubs();
+        commit("setPubs", response.data);
+      } catch (error) {
+        console.error("Fetch publicaciones error:", error);
         throw error;
       }
     },
