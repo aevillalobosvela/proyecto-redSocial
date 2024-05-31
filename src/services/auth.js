@@ -18,5 +18,11 @@ export default function createAuthService(axios, baseURL) {
     recuperarComs(dato) {
       return axios.get(`${baseURL}cpublista`, { params: dato });
     },
+    comentar(datos) {
+      return axios.put(`${baseURL}cinsertar`, datos);
+    },
+    recuperarUsersconPub() {
+      return axios.get(`${baseURL}precuperar_user`);
+    },
   };
 }

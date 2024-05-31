@@ -6,11 +6,12 @@ export default createStore({
     users: [],
     usuario: null,
     publicaciones: [],
-    comentarios: [],
+    usersconpub: [],
   },
   getters: {
     userImage(state) {
       if (state.usuario && state.usuario.datos.imagen) {
+        console.log(state.usuario);
         return URL.createObjectURL(
           new Blob([new Uint8Array(state.usuario.datos.imagen.data)], {
             type: "image/jpeg",
@@ -21,6 +22,18 @@ export default createStore({
     },
     userImages(state) {
       return state.users.map((user) => {
+        if (user.imagen) {
+          return URL.createObjectURL(
+            new Blob([new Uint8Array(user.imagen.data)], {
+              type: "image/jpeg",
+            })
+          );
+        }
+        return null;
+      });
+    },
+    userImagesPub(state) {
+      return state.usersconpub.map((user) => {
         if (user.imagen) {
           return URL.createObjectURL(
             new Blob([new Uint8Array(user.imagen.data)], {
@@ -48,8 +61,8 @@ export default createStore({
     setPubs(state, userData) {
       state.publicaciones = userData.datos;
     },
-    setComs(state, userData) {
-      state.comentarios = userData.datos;
+    setUsersconPub(state, userData) {
+      state.usersconpub = userData.datos;
     },
   },
   actions: {
@@ -86,12 +99,12 @@ export default createStore({
         throw error;
       }
     },
-    async recuperarComs({ commit }) {
+    async recuperarUsersconPub({ commit }) {
       try {
-        const response = await services.auth.recuperarComs();
-        commit("setComs", response.data);
+        const response = await services.auth.recuperarUsersconPub();
+        commit("setUsersconPub", response.data);
       } catch (error) {
-        console.error("Fetch comentarios error:", error);
+        console.error("Fetch publicaciones usuario error:", error);
         throw error;
       }
     },

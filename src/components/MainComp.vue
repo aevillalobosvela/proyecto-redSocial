@@ -13,7 +13,7 @@
                   <img
                     v-if="userImages[index]"
                     class="img-fluid m-2"
-                    style="border-radius: 50%"
+                    style="border-radius: 50%; border: solid 1px"
                     :src="userImages[index]"
                     width="60"
                     height="60"
@@ -22,7 +22,7 @@
                   <img
                     v-else
                     class="img-fluid m-2"
-                    style="border-radius: 50%"
+                    style="border-radius: 50%; border: solid 1px"
                     src="../assets/avatar.png"
                     width="60"
                     height="60"
