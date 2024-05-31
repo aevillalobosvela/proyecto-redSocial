@@ -6,6 +6,7 @@ export default createStore({
     users: [],
     usuario: null,
     publicaciones: [],
+    comentarios: [],
   },
   getters: {
     userImage(state) {
@@ -47,6 +48,9 @@ export default createStore({
     setPubs(state, userData) {
       state.publicaciones = userData.datos;
     },
+    setComs(state, userData) {
+      state.comentarios = userData.datos;
+    },
   },
   actions: {
     registerUser({ commit, state }, newUser) {
@@ -79,6 +83,15 @@ export default createStore({
         commit("setPubs", response.data);
       } catch (error) {
         console.error("Fetch publicaciones error:", error);
+        throw error;
+      }
+    },
+    async recuperarComs({ commit }) {
+      try {
+        const response = await services.auth.recuperarComs();
+        commit("setComs", response.data);
+      } catch (error) {
+        console.error("Fetch comentarios error:", error);
         throw error;
       }
     },

@@ -2,7 +2,7 @@
   <div class="card border p-3">
     <h2 class="display-6">Publicaciones</h2>
     <div class="card-body" style="max-height: 420px; overflow-y: auto">
-      <div v-for="(publicacion, index) in publicaciones" :key="index">
+      <div v-for="(publicacion, indexp) in publicaciones" :key="indexp">
         <div class="card border mb-4">
           <div class="card-header">
             <div class="row">
@@ -29,7 +29,7 @@
                     margin-bottom: 0px;
                   "
                 >
-                {{ publicacion.likes }}
+                  {{ publicacion.likes }}
                 </p>
                 <i class="mt-2 thum fa fa-thumbs-up fa-2x"></i>
               </div>
@@ -41,38 +41,38 @@
             </p>
           </div>
           <ul class="list-group list-group-flush">
-            <li class="list-group-item">
+            <li
+              class="list-group-item"
+              v-for="(comentario, index) in comentarios[publicacion.cod_pub] ||
+              []"
+              :key="index"
+            >
               <div class="row mb-2">
                 <div class="col-1">
                   <i class="mt-1 fas fa-user fa-lg"></i>
                 </div>
                 <div class="col-11">
                   <div class="container border rounded">
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                    Distinctio cum accusantium modi placeat.
-                  </div>
-                </div>
-              </div>
-              <div class="row mb-2">
-                <div class="col-1">
-                  <i class="mt-1 fas fa-user fa-lg"></i>
-                </div>
-                <div class="col-11">
-                  <div class="container border rounded">
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                    Distinctio cum accusantium modi placeat.
+                    {{ comentario.contenido_com }}
                   </div>
                 </div>
               </div>
             </li>
           </ul>
           <div class="card-footer">
-            <input
-              type="text"
-              class="form-control"
-              id="comment"
-              placeholder="Escribe un comentario..."
-            />
+            <div class="row">
+              <div class="col-10">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="comment"
+                  placeholder="Escribe un comentario..."
+                />
+              </div>
+              <div class="col-2" style="display: flex; justify-content: end">
+                <button class="btn btn-warning btn-sm">Comentar</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -81,12 +81,19 @@
 </template>
 <script>
 import { mapActions, mapState } from "vuex";
+import { reactive, toRefs } from "vue";
 export default {
   computed: {
     ...mapState(["publicaciones"]),
   },
-  data() {
-    return {};
+  setup() {
+    const state = reactive({
+      comentarios: {},
+    });
+
+    return {
+      ...toRefs(state),
+    };
   },
   methods: {
     ...mapActions(["recuperarPubs"]),
@@ -118,12 +125,39 @@ export default {
         return `${añosTotales} años`;
       }
     },
+
+    async recuperarComs(codigo_pub) {
+      try {
+        const response = await this.$services.auth.recuperarComs({
+          cod_pub: codigo_pub,
+        });
+
+        if (response.data && response.data.datos) {
+          this.comentarios[codigo_pub] = response.data.datos;
+        }
+      } catch (error) {
+        console.error(
+          "Error fetching comments for publication",
+          codigo_pub,
+          ":",
+          error
+        );
+      }
+    },
+
+    async fetchAllComments() {
+      for (const pub of this.publicaciones) {
+        await this.recuperarComs(pub.cod_pub);
+      }
+    },
   },
-  mounted() {
-    this.recuperarPubs(); 
+  async mounted() {
+    await this.recuperarPubs();
+    await this.fetchAllComments();
   },
 };
 </script>
+
 <style>
 .thum {
   transition: 0.3s;

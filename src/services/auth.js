@@ -15,5 +15,8 @@ export default function createAuthService(axios, baseURL) {
     publicar(datos) {
       return axios.put(`${baseURL}pinsertar`, datos);
     },
+    recuperarComs(dato) {
+      return axios.get(`${baseURL}cpublista`, { params: dato });
+    },
   };
 }

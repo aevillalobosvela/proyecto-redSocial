@@ -110,7 +110,7 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped>
 .thum {
   transition: 0.3s;
 }
