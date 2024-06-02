@@ -2,7 +2,7 @@
   <div class="card border p-3">
     <h2 class="display-6">Publicaciones</h2>
     <div class="card-body" style="max-height: 420px; overflow-y: auto">
-      <div v-for="(publicacion, indexp) in data_usuarios" :key="indexp">
+      <div v-for="(publicacion, indexp) in usersconpub" :key="indexp">
         <div class="card border mb-4">
           <div class="card-header">
             <div class="row">
@@ -10,7 +10,11 @@
                 <img
                   v-if="userImagesPub[indexp]"
                   class="m-2 img-fluid"
-                  style="border-radius: 15%; border: solid 1px"
+                  style="
+                    border-radius: 15%;
+                    border: solid 1px;
+                    border-color: rgb(206, 158, 186);
+                  "
                   :src="userImagesPub[indexp]"
                   alt="User Image"
                   width="100%"
@@ -19,7 +23,12 @@
                 <img
                   v-else
                   class="img-fluid m-2"
-                  style="border-radius: 15%; border: solid 1px"
+                  style="
+                    border-radius: 15%;
+                    padding: 5px;
+                    border: solid 1px;
+                    border-color: rgb(206, 158, 186);
+                  "
                   src="../assets/avatar.png"
                   width="100%"
                   height="100%"
@@ -56,22 +65,56 @@
               {{ publicacion.contenido }}
             </p>
           </div>
-          <ul class="list-group list-group-flush">
+          <ul class="list-group list-group-flush" style="max-height: 120px; overflow-y: auto">
             <li
               class="list-group-item"
               v-for="(comentario, index) in comentarios[publicacion.cod_pub] ||
               []"
               :key="index"
             >
-              <div class="row mb-2">
-                <div class="col-1">
-                  <i class="mt-1 fas fa-user fa-lg"></i>
+              <div class="row mb-2 p-0">
+                <div class="col-1 p-0">
+                  <img
+                    v-if="rutaImagen(comentario)"
+                    class="p-0"
+                    style="
+                      margin: 0px;
+                      margin-left: 4px;
+                      border-radius: 15%;
+                      border: solid 1px;
+                      border-color: rgb(206, 158, 186);
+                    "
+                    :src="rutaImagen(comentario)"
+                    alt="User Image"
+                    width="100%"
+                    height="45px"
+                  />
+                  <img
+                    v-else
+                    class="img-fluid"
+                    style="
+                      border-radius: 15%;
+                      margin-left: 4px;
+                      border: solid 1px;
+                      border-color: rgb(206, 158, 186);
+                      padding: 2px;
+                    "
+                    src="../assets/avatar.png"
+                    width="100%"
+                    height="100%"
+                  />
                 </div>
                 <div class="col-11">
-                  <p style="margin: 0; font-size: 10px">
-                    Hace
-                    {{ tiempoTranscurrido(comentario.fec_com) }}
-                  </p>
+                  <div style="display: flex; align-items: center">
+                    <h5 style="margin: 0; margin-right: 5px; font-size: 17px">
+                      {{ comentario.username }}
+                    </h5>
+                    <h5 style="margin: 0; font-size: 10px">
+                      Hace
+                      {{ tiempoTranscurrido(comentario.fec_com) }}
+                    </h5>
+                  </div>
+
                   <div class="container border rounded">
                     {{ comentario.contenido_com }}
                   </div>
@@ -80,15 +123,15 @@
             </li>
           </ul>
           <div class="card-footer">
-            <form @submit.prevent="comentar">
+            <form @submit.prevent="comentar(publicacion.cod_pub)">
               <div class="row">
                 <div class="col-10">
                   <input
                     type="text"
                     class="form-control"
-                    id="comment"
                     placeholder="Escribe un comentario..."
-                    v-model="com_publi[publicacion.cod_pub]"
+                    :id="'comentario-' + publicacion.cod_pub"
+                    autocomplete="off"
                   />
                 </div>
                 <div class="col-2" style="display: flex; justify-content: end">
@@ -109,8 +152,7 @@ import { mapState, mapActions, mapGetters } from "vuex";
 import { reactive, toRefs } from "vue";
 import Swal from "sweetalert2";
 
-function findUniqueElement(array) {
-  // Iterar sobre el array para encontrar el primer elemento con datos
+/* function findUniqueElement(array) {
   for (let i = 0; i < array.length; i++) {
     if (
       array[i] !== undefined &&
@@ -120,15 +162,12 @@ function findUniqueElement(array) {
       array[i] !== 0 &&
       !Number.isNaN(array[i])
     ) {
-      // Si se encuentra un elemento con datos, devolver su contenido y su índice
       return { contenido: array[i], indice: i };
     }
   }
 
-  // Si no se encuentra ningún elemento con datos, devolver null
-  console.error("esta vacio.");
   return null;
-}
+} */
 
 function obtenerFechaHoraActual() {
   const ahora = new Date();
@@ -150,10 +189,10 @@ export default {
   },
   data() {
     return {
-      com_publi: [],
+      com_publi: null,
       publicacionComentada: null,
       fec_com: null,
-      data_usuarios: null,
+      img_comentarios: null,
     };
   },
   setup() {
@@ -168,6 +207,19 @@ export default {
   methods: {
     ...mapActions(["recuperarPubs"]),
     ...mapActions(["recuperarUsersconPub"]),
+
+    rutaImagen(usuario) {
+      if (usuario.imagen == null) {
+        return null;
+      } else {
+        var ruta = URL.createObjectURL(
+          new Blob([new Uint8Array(usuario.imagen.data)], {
+            type: "image/jpeg",
+          })
+        );
+        return ruta;
+      }
+    },
 
     tiempoTranscurrido(desdeFecha) {
       const fechaInicial = new Date(desdeFecha);
@@ -222,10 +274,11 @@ export default {
       }
     },
 
-    async comentar() {
+    async comentar(cont) {
+      const textoid = "comentario-" + cont;
+      const texto = document.getElementById(textoid).value;
       try {
-        var res = findUniqueElement(this.com_publi);
-        if (res == null) {
+        if (texto == null) {
           Swal.fire({
             title: "No",
             text: "Comenta algo antes",
@@ -233,15 +286,15 @@ export default {
           });
           return null;
         }
-        const response = await this.$services.auth.comentar({
-          contenido_com: res.contenido,
+        await this.$services.auth.comentar({
+          contenido_com: texto,
           fec_com: obtenerFechaHoraActual(),
-          cod_pub: res.indice,
+          cod_pub: cont,
           id: this.usuario.datos.id,
         });
-        console.log(response.data);
+
         this.fetchAllComments();
-        this.com_publi = [];
+        document.getElementById(textoid).value = '';
       } catch (error) {
         console.log(error);
       }
@@ -250,9 +303,8 @@ export default {
 
   async mounted() {
     await this.recuperarPubs();
-    await this.fetchAllComments();
-    await this.recuperarUsersconPub();
-    this.data_usuarios = this.usersconpub;
+    this.fetchAllComments();
+    this.recuperarUsersconPub();
   },
 };
 </script>

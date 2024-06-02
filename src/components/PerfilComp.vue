@@ -76,25 +76,60 @@
         <div class="card border p-3">
           <h2 class="display-6">Mis publicaciones</h2>
           <div class="card-body" style="max-height: 420px; overflow-y: auto">
-            <div v-for="index in 10" :key="index">
+            <div v-for="(publicacion, indexp) in mispubs" :key="indexp">
               <div class="card border mb-4">
                 <div class="card-header">
                   <div class="row">
-                    <div class="col-1">
-                      <i class="mt-2 me-3 fas fa-user fa-2x"></i>
+                    <div class="col-2">
+                      <img
+                        v-if="userImage"
+                        class="m-2 img-fluid"
+                        style="
+                          border-radius: 15%;
+                          border: solid 1px;
+                          border-color: rgb(206, 158, 186);
+                        "
+                        :src="userImage"
+                        alt="User Image"
+                        width="100%"
+                        height="100%"
+                      />
+                      <img
+                        v-else
+                        class="img-fluid m-2"
+                        style="
+                          border-radius: 15%;
+                          padding: 5px;
+                          border: solid 1px;
+                          border-color: rgb(206, 158, 186);
+                        "
+                        src="../assets/avatar.png"
+                        width="100%"
+                        height="100%"
+                      />
                     </div>
-                    <div class="col-5">
-                      <h5 style="margin: 0px">Usuario</h5>
+                    <div class="col-4 mt-3">
+                      <h5 style="margin: 0px">{{ publicacion.username }}</h5>
                       <p style="margin: 0px">
-                        <small>4 de abril</small>
+                        <small
+                          >Hace
+                          {{ tiempoTranscurrido(publicacion.fec_pub) }}</small
+                        >
                       </p>
                     </div>
                     <div
                       style="display: flex; justify-content: end"
-                      class="col-6 text-end"
+                      class="mt-3 col-6 text-end"
                     >
-                      <p style="margin: 4px">
-                        <small>15</small>
+                      <p
+                        style="
+                          font-size: 25px;
+                          margin-right: 10px;
+                          margin-top: 8px;
+                          margin-bottom: 0px;
+                        "
+                      >
+                        {{ publicacion.likes }}
                       </p>
                       <i class="mt-2 thum fa fa-thumbs-up fa-2x"></i>
                     </div>
@@ -102,45 +137,81 @@
                 </div>
                 <div class="card-body">
                   <p>
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                    Distinctio cum accusantium modi placeat iste est ad at.
-                    Delectus, commodi laboriosam officia deleniti mollitia nulla
-                    et autem ex nam doloribus labore?
+                    {{ publicacion.contenido }}
                   </p>
                 </div>
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item">
-                    <div class="row mb-2">
-                      <div class="col-1">
-                        <i class="mt-1 fas fa-user fa-lg"></i>
-                      </div>
-                      <div class="col-11">
-                        <div class="container border rounded">
-                          Lorem ipsum dolor sit, amet consectetur adipisicing
-                          elit. Distinctio cum accusantium modi placeat.
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row mb-2">
-                      <div class="col-1">
-                        <i class="mt-1 fas fa-user fa-lg"></i>
-                      </div>
-                      <div class="col-11">
-                        <div class="container border rounded">
-                          Lorem ipsum dolor sit, amet consectetur adipisicing
-                          elit. Distinctio cum accusantium modi placeat.
-                        </div>
-                      </div>
-                    </div>
-                  </li>
-                </ul>
-                <div class="card-footer">
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="comment"
-                    placeholder="Escribe un comentario..."
+                <!--  <ul class="list-group list-group-flush" style="max-height: 120px; overflow-y: auto">
+            <li
+              class="list-group-item"
+              v-for="(comentario, index) in comentarios[publicacion.cod_pub] ||
+              []"
+              :key="index"
+            >
+              <div class="row mb-2 p-0">
+                <div class="col-1 p-0">
+                  <img
+                    v-if="rutaImagen(comentario)"
+                    class="p-0"
+                    style="
+                      margin: 0px;
+                      margin-left: 4px;
+                      border-radius: 15%;
+                      border: solid 1px;
+                      border-color: rgb(206, 158, 186);
+                    "
+                    :src="rutaImagen(comentario)"
+                    alt="User Image"
+                    width="100%"
+                    height="45px"
                   />
+                  <img
+                    v-else
+                    class="img-fluid"
+                    style="
+                      border-radius: 15%;
+                      margin-left: 4px;
+                      border: solid 1px;
+                      border-color: rgb(206, 158, 186);
+                      padding: 2px;
+                    "
+                    src="../assets/avatar.png"
+                    width="100%"
+                    height="100%"
+                  />
+                </div>
+                <div class="col-11">
+                  <div style="display: flex; align-items: center">
+                    <h5 style="margin: 0; margin-right: 5px; font-size: 17px">
+                      {{ comentario.username }}
+                    </h5>
+                    <h5 style="margin: 0; font-size: 10px">
+                      Hace
+                      {{ tiempoTranscurrido(comentario.fec_com) }}
+                    </h5>
+                  </div>
+
+                  <div class="container border rounded">
+                    {{ comentario.contenido_com }}
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul> -->
+                <div class="card-footer">
+                  <form @submit.prevent="comentar(publicacion.cod_pub)">
+                    <div class="row">
+                      <div class="col-9">
+                      </div>
+                      <div
+                        class="col-3"
+                        style="display: flex; justify-content: end"
+                      >
+                        <button type="submit" class="btn btn-danger btn-sm">
+                          Eliminar
+                        </button>
+                      </div>
+                    </div>
+                  </form>
                 </div>
               </div>
             </div>
@@ -152,10 +223,37 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
-import { mapGetters } from "vuex";
+import { mapState, mapGetters } from "vuex";
 export default {
   methods: {
+    tiempoTranscurrido(desdeFecha) {
+      const fechaInicial = new Date(desdeFecha);
+      const ahora = new Date();
+      const diferencia = ahora - fechaInicial;
+
+      const segundosTotales = Math.floor(diferencia / 1000);
+      const minutosTotales = Math.floor(segundosTotales / 60);
+      const horasTotales = Math.floor(minutosTotales / 60);
+      const diasTotales = Math.floor(horasTotales / 24);
+      const semanasTotales = Math.floor(diasTotales / 7);
+      const mesesTotales = Math.floor(diasTotales / 30);
+      const añosTotales = Math.floor(diasTotales / 365);
+
+      if (minutosTotales < 60) {
+        return `${minutosTotales} minutos`;
+      } else if (horasTotales < 24) {
+        return `${horasTotales} horas`;
+      } else if (diasTotales < 7) {
+        return `${diasTotales} días`;
+      } else if (semanasTotales < 4) {
+        return `${semanasTotales} semanas`;
+      } else if (mesesTotales < 12) {
+        return `${mesesTotales} meses`;
+      } else {
+        return `${añosTotales} años`;
+      }
+    },
+
     formatDate(dateString) {
       const date = new Date(dateString);
       const year = date.getFullYear();
@@ -165,7 +263,7 @@ export default {
     },
   },
   computed: {
-    ...mapState(["usuario"]),
+    ...mapState(["usuario", "mispubs"]),
     ...mapGetters(["userImage"]),
   },
 };

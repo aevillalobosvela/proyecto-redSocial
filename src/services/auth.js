@@ -24,5 +24,9 @@ export default function createAuthService(axios, baseURL) {
     recuperarUsersconPub() {
       return axios.get(`${baseURL}precuperar_user`);
     },
+    recuperarmisPubs(dato) {
+      console.log(dato)
+      return axios.get(`${baseURL}pmis_pub`,{ params: dato });
+    },
   };
 }

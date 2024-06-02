@@ -7,11 +7,11 @@ export default createStore({
     usuario: null,
     publicaciones: [],
     usersconpub: [],
+    mispubs: [],
   },
   getters: {
     userImage(state) {
       if (state.usuario && state.usuario.datos.imagen) {
-        console.log(state.usuario);
         return URL.createObjectURL(
           new Blob([new Uint8Array(state.usuario.datos.imagen.data)], {
             type: "image/jpeg",
@@ -61,6 +61,9 @@ export default createStore({
     setPubs(state, userData) {
       state.publicaciones = userData.datos;
     },
+    setmisPubs(state, userData) {
+      state.mispubs = userData.datos;
+    },
     setUsersconPub(state, userData) {
       state.usersconpub = userData.datos;
     },
@@ -105,6 +108,18 @@ export default createStore({
         commit("setUsersconPub", response.data);
       } catch (error) {
         console.error("Fetch publicaciones usuario error:", error);
+        throw error;
+      }
+    },
+    async recuperarmisPubs({ commit }) {
+      try {
+        const response = await services.auth.recuperarmisPubs({
+          id: this.state.usuario.datos.id,
+        });
+        console.log(response.datos);
+        commit("setmisPubs", response.data);
+      } catch (error) {
+        console.error("Fetch publicaciones error:", error);
         throw error;
       }
     },

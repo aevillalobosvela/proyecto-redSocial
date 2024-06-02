@@ -104,9 +104,11 @@ export default {
   },
   methods: {
     ...mapActions(["fetchUsers"]),
+    ...mapActions(["recuperarmisPubs"]),
   },
   mounted() {
     this.fetchUsers(); // Obtener los usuarios cuando el componente se monta
+    this.recuperarmisPubs();
   },
 };
 </script>
