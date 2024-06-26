@@ -54,7 +54,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from "vuex";
+import { mapState, mapGetters, mapActions } from "vuex";
 import Swal from "sweetalert2";
 export default {
   computed: {
@@ -68,6 +68,7 @@ export default {
     };
   },
   methods: {
+    ...mapActions(["recuperarmisPubs"]),
     obtenerFechaHoraActual() {
       const ahora = new Date();
 
@@ -83,7 +84,7 @@ export default {
 
     async publicar() {
       try {
-        const response = await this.$services.auth.publicar({
+        await this.$services.auth.publicar({
           contenido: this.contenido,
           likes: 0,
           fec_pub: this.fec_pub,
@@ -94,7 +95,7 @@ export default {
           text: "Publicado correctamente :)",
           icon: "success",
         });
-        console.log(response.data);
+        this.recuperarmisPubs();
         this.$router.push("/publicaciones");
       } catch (error) {
         Swal.fire({

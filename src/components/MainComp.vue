@@ -75,8 +75,8 @@
                 <em>{{ usuario.datos.username }}</em>
               </h5>
             </div>
-            <p><em>Publicaciones:</em> 15</p>
-            <p><em>Contactos:</em> 15</p>
+            <p><em>Publicaciones:</em> {{ count_pubs }}</p>
+            <p><em>Likes:</em> {{ mis_likes }}</p>
           </div>
           <div class="text-center mb-3">
             <a class="btn btn-light border">
@@ -96,11 +96,14 @@
 import { mapState, mapActions, mapGetters } from "vuex";
 export default {
   computed: {
-    ...mapState(["usuario", "users"]),
+    ...mapState(["usuario", "users", "count_pubs"]),
     ...mapGetters(["userImage", "userImages"]),
   },
   data() {
-    return {};
+    return {
+      mis_likes: 0,
+      mis_pubs: 0,
+    };
   },
   methods: {
     ...mapActions(["fetchUsers"]),

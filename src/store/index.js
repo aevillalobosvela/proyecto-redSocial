@@ -8,6 +8,7 @@ export default createStore({
     publicaciones: [],
     usersconpub: [],
     mispubs: [],
+    count_pubs: 0,
   },
   getters: {
     userImage(state) {
@@ -63,6 +64,7 @@ export default createStore({
     },
     setmisPubs(state, userData) {
       state.mispubs = userData.datos;
+      state.count_pubs = userData.datos.length;
     },
     setUsersconPub(state, userData) {
       state.usersconpub = userData.datos;
