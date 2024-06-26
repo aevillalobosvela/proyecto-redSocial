@@ -161,6 +161,7 @@
 </template>
 
 <script>
+import Swal from "sweetalert2";
 import { mapState, mapGetters, mapActions } from "vuex";
 export default {
   data() {
@@ -208,13 +209,25 @@ export default {
     },
 
     async eliminar(pub_id) {
-      try {
-        await this.$services.auth.eliminarPub({
-          cod_pub: pub_id,
-        });
-        this.recuperarmisPubs();
-      } catch (error) {
-        console.log(error);
+      const result = await Swal.fire({
+        title: "Estas seguro?",
+        text: "Esta accion no se puede revertir!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Si, estoy seguro!",
+      });
+
+      if (result.isConfirmed) {
+        try {
+          await this.$services.auth.eliminarPub({
+            cod_pub: pub_id,
+          });
+          this.recuperarmisPubs();
+        } catch (error) {
+          console.log(error);
+        }
       }
     },
   },
