@@ -140,74 +140,12 @@
                     {{ publicacion.contenido }}
                   </p>
                 </div>
-                <!--  <ul class="list-group list-group-flush" style="max-height: 120px; overflow-y: auto">
-            <li
-              class="list-group-item"
-              v-for="(comentario, index) in comentarios[publicacion.cod_pub] ||
-              []"
-              :key="index"
-            >
-              <div class="row mb-2 p-0">
-                <div class="col-1 p-0">
-                  <img
-                    v-if="rutaImagen(comentario)"
-                    class="p-0"
-                    style="
-                      margin: 0px;
-                      margin-left: 4px;
-                      border-radius: 15%;
-                      border: solid 1px;
-                      border-color: rgb(206, 158, 186);
-                    "
-                    :src="rutaImagen(comentario)"
-                    alt="User Image"
-                    width="100%"
-                    height="45px"
-                  />
-                  <img
-                    v-else
-                    class="img-fluid"
-                    style="
-                      border-radius: 15%;
-                      margin-left: 4px;
-                      border: solid 1px;
-                      border-color: rgb(206, 158, 186);
-                      padding: 2px;
-                    "
-                    src="../assets/avatar.png"
-                    width="100%"
-                    height="100%"
-                  />
-                </div>
-                <div class="col-11">
-                  <div style="display: flex; align-items: center">
-                    <h5 style="margin: 0; margin-right: 5px; font-size: 17px">
-                      {{ comentario.username }}
-                    </h5>
-                    <h5 style="margin: 0; font-size: 10px">
-                      Hace
-                      {{ tiempoTranscurrido(comentario.fec_com) }}
-                    </h5>
-                  </div>
-
-                  <div class="container border rounded">
-                    {{ comentario.contenido_com }}
-                  </div>
-                </div>
-              </div>
-            </li>
-          </ul> -->
                 <div class="card-footer">
-                  <form @submit.prevent="comentar(publicacion.cod_pub)">
-                    <div class="row">
-                      <div class="col-9">
-                      </div>
-                      <div
-                        class="col-3"
-                        style="display: flex; justify-content: end"
-                      >
+                  <form @submit.prevent="eliminar(publicacion.cod_pub)">
+                    <div class="row text-center">
+                      <div class="col-12">
                         <button type="submit" class="btn btn-danger btn-sm">
-                          Eliminar
+                          Eliminar publicacion
                         </button>
                       </div>
                     </div>
@@ -223,9 +161,16 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from "vuex";
+import { mapState, mapGetters, mapActions } from "vuex";
 export default {
+  data() {
+    return {
+      num: 2,
+    };
+  },
   methods: {
+    ...mapActions(["recuperarmisPubs"]),
+
     tiempoTranscurrido(desdeFecha) {
       const fechaInicial = new Date(desdeFecha);
       const ahora = new Date();
@@ -260,6 +205,17 @@ export default {
       const month = String(date.getMonth() + 1).padStart(2, "0");
       const day = String(date.getDate()).padStart(2, "0");
       return `${year}-${month}-${day}`;
+    },
+
+    async eliminar(pub_id) {
+      try {
+        await this.$services.auth.eliminarPub({
+          cod_pub: pub_id,
+        });
+        this.recuperarmisPubs();
+      } catch (error) {
+        console.log(error);
+      }
     },
   },
   computed: {

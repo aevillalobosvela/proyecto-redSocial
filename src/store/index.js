@@ -116,7 +116,6 @@ export default createStore({
         const response = await services.auth.recuperarmisPubs({
           id: this.state.usuario.datos.id,
         });
-        console.log(response.datos);
         commit("setmisPubs", response.data);
       } catch (error) {
         console.error("Fetch publicaciones error:", error);
