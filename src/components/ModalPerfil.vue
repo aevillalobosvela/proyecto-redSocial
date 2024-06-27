@@ -37,7 +37,7 @@
             <div class="card-body p-4">
               <h6>Mi informacion</h6>
               <hr class="mt-0 mb-4" />
-              <form @submit.prevent="registrar">
+              <form @submit.prevent="modificar">
                 <div class="row">
                   <div class="col-6 mb-3">
                     <label for="nombre" class="form-label">Nombre(s)</label>
@@ -163,7 +163,8 @@
 </template>
 
 <script>
-/* import Swal from "sweetalert2"; */
+import CryptoJS from "crypto-js";
+import Swal from "sweetalert2";
 import { mapState, mapGetters, mapActions } from "vuex";
 export default {
   data() {
@@ -196,6 +197,64 @@ export default {
 
     apecomp() {
       this.apellido = this.apellido.replace(/[^a-zA-Z]/g, "");
+    },
+
+    async modificar() {
+      if (this.password != this.reppassword) {
+        Swal.fire({
+          title: "¡Oh no!",
+          text: "Las contraseñas no coinciden",
+          icon: "error",
+        });
+        return;
+      }
+      var hashedText = CryptoJS.SHA256(this.password).toString(
+        CryptoJS.enc.Hex
+      );
+      if (hashedText != this.usuario.datos.password) {
+        Swal.fire({
+          title: "¡Oh no!",
+          text: "Contraseña incorrecta",
+          icon: "error",
+        });
+        return;
+      }
+      var respuesta = "";
+      try {
+        respuesta = await this.$services.auth.modificarUsuario({
+          id: this.usuario.datos.id,
+          nombre: this.nombre,
+          apellido: this.apellido,
+          username: this.username,
+          fecnac: this.fecnac,
+          imagen: null,
+        });
+        if (respuesta.data.success === 1) {
+          Swal.fire({
+            title: "¡Genial!",
+            text: "Usuario modificado correctamente",
+            icon: "success",
+          });
+          const response = await this.$services.auth.login({
+            username: this.username,
+            password: this.password,
+          });
+          this.$store.commit('setUserData', response.data);
+          this.$router.push("/perfil");
+        } else {
+          Swal.fire({
+            title: "Lo siento :(",
+            text: "Hubo un error en la modificacion",
+            icon: "warning",
+          });
+        }
+      } catch (error) {
+        Swal.fire({
+          title: "Lo siento :(",
+          text: "Error en la modificacion",
+          icon: "warning",
+        });
+      }
     },
   },
   computed: {
