@@ -27,7 +27,9 @@
               />
               <h5>{{ usuario.datos.nombre }} {{ usuario.datos.apellido }}</h5>
               <p>{{ usuario.datos.username }}</p>
-              <i class="far fa-edit mb-5"></i>
+              <router-link to="/modperfil">
+                <i class="gho fa-solid fa-edit fa-3x text-white"></i>
+              </router-link>
             </div>
             <div class="col-md-8">
               <div class="card-body p-4">
@@ -60,11 +62,11 @@
                 <div class="row pt-1">
                   <div class="col-6 mb-3">
                     <h6>Publicaciones</h6>
-                    <p class="text-muted">14</p>
+                    <p class="text-muted">{{ count_pubs }}</p>
                   </div>
                   <div class="col-6 mb-3">
-                    <h6>Contactos</h6>
-                    <p class="text-muted">22</p>
+                    <h6>Likes</h6>
+                    <p class="text-muted">{{ likes_user }}</p>
                   </div>
                 </div>
               </div>
@@ -72,6 +74,7 @@
           </div>
         </div>
       </div>
+
       <div class="col-lg-7 col-sm-12 mt-3 mb-2">
         <div class="card border p-3">
           <h2 class="display-6">Mis publicaciones</h2>
@@ -232,7 +235,7 @@ export default {
     },
   },
   computed: {
-    ...mapState(["usuario", "mispubs"]),
+    ...mapState(["usuario", "mispubs", "count_pubs", "likes_user"]),
     ...mapGetters(["userImage"]),
   },
 };
@@ -243,6 +246,9 @@ export default {
   transition: 0.3s;
 }
 .thum:hover {
+  color: var(--sec-color);
+}
+.gho:hover {
   color: var(--sec-color);
 }
 .custom-link {

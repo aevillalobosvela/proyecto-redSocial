@@ -9,6 +9,7 @@ export default createStore({
     usersconpub: [],
     mispubs: [],
     count_pubs: 0,
+    likes_user: 0,
   },
   getters: {
     userImage(state) {
