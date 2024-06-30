@@ -132,6 +132,13 @@
                   </div>
                 </div>
               </form>
+              <div class="row">
+                <div class="text-end">
+                  <router-link to="/modpassword">
+                    <p style="margin-bottom: 0px; color: rgb(41, 40, 40)">Cambiar password</p>
+                  </router-link>
+                </div>
+              </div>
               <!--               <div class="row pt-1">
                 <div class="col-6 mb-3">
                   <h6>Nombre(s)</h6>
@@ -239,7 +246,7 @@ export default {
             username: this.username,
             password: this.password,
           });
-          this.$store.commit('setUserData', response.data);
+          this.$store.commit("setUserData", response.data);
           this.$router.push("/perfil");
         } else {
           Swal.fire({

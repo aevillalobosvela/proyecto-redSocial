@@ -4,6 +4,7 @@ import MainView from "../views/MainView.vue";
 import RegistroView from "../views/RegistroView.vue";
 import PerfilView from "../views/PerfilView.vue";
 import ModalView from "../views/ModalView.vue";
+import PassView from "../views/PassView.vue";
 
 import PublicacionesComp from "../components/PublicacionesComp.vue";
 import PublicarComp from "../components/PublicarComp.vue";
@@ -45,6 +46,11 @@ const routes = [
     path: "/modperfil",
     name: "modperfil",
     component: ModalView,
+  },
+  {
+    path: "/modpassword",
+    name: "modpassword",
+    component: PassView,
   },
 ];
 

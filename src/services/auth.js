@@ -12,6 +12,9 @@ export default function createAuthService(axios, baseURL) {
     modificarUsuario(datos) {
       return axios.post(`${baseURL}actualizar`, datos);
     },
+    modificarPass(datos) {
+      return axios.post(`${baseURL}actualizarpass`, datos);
+    },
     recuperarPubs() {
       return axios.get(`${baseURL}plista`);
     },
