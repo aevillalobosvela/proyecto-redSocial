@@ -10,6 +10,7 @@ export default createStore({
     mispubs: [],
     count_pubs: 0,
     likes_user: 0,
+    likes_in_pub: [],
   },
   getters: {
     userImage(state) {
@@ -70,6 +71,9 @@ export default createStore({
     setUsersconPub(state, userData) {
       state.usersconpub = userData.datos;
     },
+    setlikesinPubs(state, userData) {
+      state.likes_in_pub = userData.datos;
+    },
   },
   actions: {
     registerUser({ commit, state }, newUser) {
@@ -122,6 +126,17 @@ export default createStore({
         commit("setmisPubs", response.data);
       } catch (error) {
         console.error("Fetch publicaciones error:", error);
+        throw error;
+      }
+    },
+    async recuperarlikesinPubs({ commit }) {
+      try {
+        const response = await services.auth.recuperarlikes({
+          id: this.state.usuario.datos.id,
+        });
+        commit("setlikesinPubs", response.data);
+      } catch (error) {
+        console.error("Fetch likes error:", error);
         throw error;
       }
     },

@@ -31,10 +31,16 @@ export default function createAuthService(axios, baseURL) {
       return axios.get(`${baseURL}precuperar_user`);
     },
     recuperarmisPubs(dato) {
-      return axios.get(`${baseURL}pmis_pub`,{ params: dato });
+      return axios.get(`${baseURL}pmis_pub`, { params: dato });
     },
     eliminarPub(dato) {
       return axios.delete(`${baseURL}peliminar`, { params: dato });
+    },
+    recuperarlikes(dato) {
+      return axios.get(`${baseURL}llistado_user`, { params: dato });
+    },
+    darlike(dato) {
+      return axios.put(`${baseURL}linsertar`, dato);
     },
   };
 }

@@ -134,7 +134,7 @@
                       >
                         {{ publicacion.likes }}
                       </p>
-                      <i class="mt-2 thum fa fa-thumbs-up fa-2x"></i>
+                      <i class="mt-2 fa fa-thumbs-up fa-2x"></i>
                     </div>
                   </div>
                 </div>
@@ -245,12 +245,7 @@ export default {
 .thum {
   transition: 0.3s;
 }
-.thum:hover {
-  color: var(--sec-color);
-}
-.gho:hover {
-  color: var(--sec-color);
-}
+
 .custom-link {
   text-decoration: none;
   margin-left: 15px;

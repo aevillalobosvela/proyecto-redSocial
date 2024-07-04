@@ -56,7 +56,19 @@
                 >
                   {{ publicacion.likes }}
                 </p>
-                <i class="mt-2 thum fa fa-thumbs-up fa-2x"></i>
+
+                <i
+                  v-if="comprobar_like(publicacion.cod_pub)"
+                  class="mt-2 thum fa fa-thumbs-up fa-2x"
+                  style="color: rgb(230, 155, 240)"
+                  v-on:click="quitarlike(publicacion.cod_pub)"
+                ></i>
+
+                <i
+                  v-else
+                  class="mt-2 thum fa fa-thumbs-up fa-2x"
+                  v-on:click="darlike(publicacion.cod_pub)"
+                ></i>
               </div>
             </div>
           </div>
@@ -65,7 +77,10 @@
               {{ publicacion.contenido }}
             </p>
           </div>
-          <ul class="list-group list-group-flush" style="max-height: 120px; overflow-y: auto">
+          <ul
+            class="list-group list-group-flush"
+            style="max-height: 120px; overflow-y: auto"
+          >
             <li
               class="list-group-item"
               v-for="(comentario, index) in comentarios[publicacion.cod_pub] ||
@@ -152,23 +167,6 @@ import { mapState, mapActions, mapGetters } from "vuex";
 import { reactive, toRefs } from "vue";
 import Swal from "sweetalert2";
 
-/* function findUniqueElement(array) {
-  for (let i = 0; i < array.length; i++) {
-    if (
-      array[i] !== undefined &&
-      array[i] !== null &&
-      array[i] !== "" &&
-      array[i] !== false &&
-      array[i] !== 0 &&
-      !Number.isNaN(array[i])
-    ) {
-      return { contenido: array[i], indice: i };
-    }
-  }
-
-  return null;
-} */
-
 function obtenerFechaHoraActual() {
   const ahora = new Date();
 
@@ -184,7 +182,7 @@ function obtenerFechaHoraActual() {
 
 export default {
   computed: {
-    ...mapState(["usuario", "publicaciones", "usersconpub"]),
+    ...mapState(["usuario", "publicaciones", "usersconpub", "likes_in_pub"]),
     ...mapGetters(["userImagesPub"]),
   },
   data() {
@@ -207,6 +205,7 @@ export default {
   methods: {
     ...mapActions(["recuperarPubs"]),
     ...mapActions(["recuperarUsersconPub"]),
+    ...mapActions(["recuperarlikesinPubs"]),
 
     rutaImagen(usuario) {
       if (usuario.imagen == null) {
@@ -294,10 +293,34 @@ export default {
         });
 
         this.fetchAllComments();
-        document.getElementById(textoid).value = '';
+        document.getElementById(textoid).value = "";
       } catch (error) {
         console.log(error);
       }
+    },
+
+    async darlike(cod_pub) {
+      try {
+        await this.$services.auth.darlike({
+          id: this.usuario.datos.id,
+          cod_pub: cod_pub,
+        });
+        this.recuperarUsersconPub();
+        this.recuperarlikesinPubs();
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+    quitarlike(cod_pub) {
+      console.log(cod_pub);
+    },
+
+    comprobar_like(codpub) {
+      for (const reg of this.likes_in_pub) {
+        if (codpub == reg.cod_pub) return true;
+      }
+      return false;
     },
   },
 
@@ -305,6 +328,7 @@ export default {
     await this.recuperarPubs();
     this.fetchAllComments();
     this.recuperarUsersconPub();
+    this.recuperarlikesinPubs();
   },
 };
 </script>
