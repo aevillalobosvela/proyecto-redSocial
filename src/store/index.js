@@ -74,6 +74,9 @@ export default createStore({
     setlikesinPubs(state, userData) {
       state.likes_in_pub = userData.datos;
     },
+    setmislikes(state, userData) {
+      state.likes_user = userData.datos;
+    },
   },
   actions: {
     registerUser({ commit, state }, newUser) {
@@ -135,6 +138,17 @@ export default createStore({
           id: this.state.usuario.datos.id,
         });
         commit("setlikesinPubs", response.data);
+      } catch (error) {
+        console.error("Fetch likes error:", error);
+        throw error;
+      }
+    },
+    async recuperarmislikes({ commit }) {
+      try {
+        const response = await services.auth.recuperarmislikes({
+          id: this.state.usuario.datos.id,
+        });
+        commit("setmislikes", response.data);
       } catch (error) {
         console.error("Fetch likes error:", error);
         throw error;

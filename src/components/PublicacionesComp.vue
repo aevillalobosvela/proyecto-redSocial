@@ -206,6 +206,7 @@ export default {
     ...mapActions(["recuperarPubs"]),
     ...mapActions(["recuperarUsersconPub"]),
     ...mapActions(["recuperarlikesinPubs"]),
+    ...mapActions(["recuperarmislikes"]),
 
     rutaImagen(usuario) {
       if (usuario.imagen == null) {
@@ -307,13 +308,24 @@ export default {
         });
         this.recuperarUsersconPub();
         this.recuperarlikesinPubs();
+        this.recuperarmislikes();
       } catch (error) {
         console.log(error);
       }
     },
 
-    quitarlike(cod_pub) {
-      console.log(cod_pub);
+    async quitarlike(cod_pub) {   
+      try {
+        await this.$services.auth.quitarlike({
+          id: this.usuario.datos.id,
+          cod_pub: cod_pub,
+        });
+        this.recuperarUsersconPub();
+        this.recuperarlikesinPubs();
+        this.recuperarmislikes();
+      } catch (error) {
+        console.log(error);
+      }
     },
 
     comprobar_like(codpub) {
@@ -329,6 +341,7 @@ export default {
     this.fetchAllComments();
     this.recuperarUsersconPub();
     this.recuperarlikesinPubs();
+    this.recuperarmislikes();
   },
 };
 </script>

@@ -76,7 +76,7 @@
               </h5>
             </div>
             <p><em>Publicaciones:</em> {{ count_pubs }}</p>
-            <p><em>Likes:</em> {{ mis_likes }}</p>
+            <p><em>Likes en mis publicaciones:</em> {{ likes_user }}</p>
           </div>
           <div class="text-center mb-3">
             <a class="btn btn-light border">
@@ -96,7 +96,7 @@
 import { mapState, mapActions, mapGetters } from "vuex";
 export default {
   computed: {
-    ...mapState(["usuario", "users", "count_pubs"]),
+    ...mapState(["usuario", "users", "count_pubs","likes_user"]),
     ...mapGetters(["userImage", "userImages"]),
   },
   data() {

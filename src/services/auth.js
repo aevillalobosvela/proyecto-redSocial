@@ -42,5 +42,11 @@ export default function createAuthService(axios, baseURL) {
     darlike(dato) {
       return axios.put(`${baseURL}linsertar`, dato);
     },
+    quitarlike(dato) {
+      return axios.put(`${baseURL}lquitar`, dato);
+    },
+    recuperarmislikes(dato) {
+      return axios.get(`${baseURL}lmislikes`, { params: dato });
+    },
   };
 }
