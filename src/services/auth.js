@@ -6,8 +6,28 @@ export default function createAuthService(axios, baseURL) {
     getAllUsers() {
       return axios.get(`${baseURL}lista`);
     },
-    registrarUsuario(datos) {
-      return axios.put(`${baseURL}insertar`, datos);
+    registrarUsuario: async (datosUsuario) => {
+      try {
+        const formData = new FormData();
+        formData.append("nombre", datosUsuario.nombre);
+        formData.append("apellido", datosUsuario.apellido);
+        formData.append("username", datosUsuario.username);
+        formData.append("fecnac", datosUsuario.fecnac);
+        formData.append("password", datosUsuario.password);
+        if (datosUsuario.imagenperfil) {
+          formData.append("imagenperfil", datosUsuario.imagenperfil);
+        
+        }
+        const response = await axios.post(`${baseURL}insertar`, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
+
+        return response.data; // Puedes manejar la respuesta del backend aquí si es necesario
+      } catch (error) {
+        throw new Error(`Error al registrar usuario: ${error.message}`);
+      }
     },
     modificarUsuario(datos) {
       return axios.post(`${baseURL}actualizar`, datos);

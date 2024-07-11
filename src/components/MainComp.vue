@@ -53,10 +53,10 @@
           <div class="card-body">
             <div class="text-center">
               <img
-                v-if="userImage"
+                v-if="usuario.datos.imagenurl"
                 class="m-2 img-fluid"
                 style="border-radius: 15%"
-                :src="userImage"
+                :src="usuario.datos.imagenurl"
                 alt="User Image"
                 width="180"
                 height="180"
@@ -96,13 +96,14 @@
 import { mapState, mapActions, mapGetters } from "vuex";
 export default {
   computed: {
-    ...mapState(["usuario", "users", "count_pubs","likes_user"]),
+    ...mapState(["usuario", "users", "count_pubs", "likes_user"]),
     ...mapGetters(["userImage", "userImages"]),
   },
   data() {
     return {
       mis_likes: 0,
       mis_pubs: 0,
+      imagenperfil: null,
     };
   },
   methods: {
@@ -112,6 +113,8 @@ export default {
   mounted() {
     this.fetchUsers(); // Obtener los usuarios cuando el componente se monta
     this.recuperarmisPubs();
+    console.log(this.usuario.datos.imagenurl);
+    this.imagenperfil = this.usuario.datos.imagenurl;
   },
 };
 </script>

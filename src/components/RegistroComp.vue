@@ -95,7 +95,7 @@
                     <input
                       type="file"
                       class="form-control"
-                      @change="handleFileUpload"
+                      @change="onFileChange"
                       accept="image/*"
                     />
                   </div>
@@ -151,25 +151,6 @@ export default {
       this.apellido = this.apellido.replace(/[^a-zA-Z]/g, "");
     },
 
-    handleFileUpload(event) {
-      const file = event.target.files[0];
-
-      if (file) {
-        const reader = new FileReader();
-
-        reader.onload = (event) => {
-          // Cambiar a función de flecha
-          const arrayBuffer = event.target.result;
-          const uint8Array = new Uint8Array(arrayBuffer);
-          this.imagen = Array.from(uint8Array); // `this` ahora apunta al componente Vue
-        };
-
-        reader.readAsArrayBuffer(file);
-      } else {
-        console.error("No se ha seleccionado ningún archivo.");
-      }
-    },
-
     async registrar() {
       var respuesta = "";
       try {
@@ -179,9 +160,9 @@ export default {
           username: this.username,
           fecnac: this.fecnac,
           password: this.password,
-          imagen: null,
+          imagenperfil: this.imagen,
         });
-        if (respuesta.data.success === 1) {
+          if (respuesta.success === 1) {
           Swal.fire({
             title: "¡Genial!",
             text: "Usuario registrado correctamente",
@@ -191,17 +172,21 @@ export default {
         } else {
           Swal.fire({
             title: "Lo siento :(",
-            text: respuesta.data.error,
+            text: respuesta.error,
             icon: "warning",
           });
         }
       } catch (error) {
         Swal.fire({
           title: "Lo siento :(",
-          text: "Error en el registro",
+          text: respuesta.error,
           icon: "warning",
         });
       }
+    },
+
+    onFileChange(event) {
+      this.imagen = event.target.files[0];
     },
   },
 };
