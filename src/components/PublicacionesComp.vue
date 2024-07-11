@@ -8,28 +8,28 @@
             <div class="row">
               <div class="col-2">
                 <img
-                  v-if="userImagesPub[indexp]"
+                  v-if="publicacion.imagenurl"
                   class="m-2 img-fluid"
                   style="
                     border-radius: 15%;
                     border: solid 1px;
                     border-color: rgb(206, 158, 186);
                   "
-                  :src="userImagesPub[indexp]"
+                  :src="publicacion.imagenurl"
                   alt="User Image"
                   width="100%"
                   height="100%"
                 />
                 <img
                   v-else
-                  class="img-fluid m-2"
+                  class="m-2 img-fluid"
                   style="
                     border-radius: 15%;
-                    padding: 5px;
                     border: solid 1px;
                     border-color: rgb(206, 158, 186);
                   "
                   src="../assets/avatar.png"
+                  alt="User Image"
                   width="100%"
                   height="100%"
                 />
@@ -209,15 +209,10 @@ export default {
     ...mapActions(["recuperarmislikes"]),
 
     rutaImagen(usuario) {
-      if (usuario.imagen == null) {
+      if (usuario.imagenurl == null) {
         return null;
       } else {
-        var ruta = URL.createObjectURL(
-          new Blob([new Uint8Array(usuario.imagen.data)], {
-            type: "image/jpeg",
-          })
-        );
-        return ruta;
+        return usuario.imagenurl;
       }
     },
 
@@ -314,7 +309,7 @@ export default {
       }
     },
 
-    async quitarlike(cod_pub) {   
+    async quitarlike(cod_pub) {
       try {
         await this.$services.auth.quitarlike({
           id: this.usuario.datos.id,

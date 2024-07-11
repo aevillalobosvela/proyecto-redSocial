@@ -11,18 +11,18 @@
             "
           >
             <img
-              v-if="userImage"
-              :src="userImage"
-              alt="Avatar"
+              v-if="usuario.datos.imagenurl"
               class="img-fluid my-5"
               style="border-radius: 15%; width: 170px"
+              :src="usuario.datos.imagenurl"
+              alt="User Image"
             />
             <img
               v-else
-              src="../assets/avatar.png"
-              alt="Avatar"
               class="img-fluid my-5"
               style="border-radius: 15%; width: 170px"
+              src="../assets/avatar.png"
+              alt="User Image"
             />
             <h3>Realiza cambios en la informacion de tu perfil</h3>
             <div class="m-4">
@@ -85,6 +85,19 @@
                       required
                     />
                   </div>
+                  <div class="row mb-3">
+                    <div class="col-12">
+                      <label for="image" class="form-label"
+                        >Foto de perfil</label
+                      >
+                      <input
+                        type="file"
+                        class="form-control"
+                        @change="onFileChange"
+                        accept="image/*"
+                      />
+                    </div>
+                  </div>
                 </div>
                 <h6>Ingresa tu password para verificar la accion</h6>
                 <hr class="mt-3 mb-3" />
@@ -113,17 +126,6 @@
                     />
                   </div>
                 </div>
-                <!-- <div class="row mb-3">
-                  <div class="col-12">
-                    <label for="image" class="form-label">Foto de perfil</label>
-                    <input
-                      type="file"
-                      class="form-control"
-                      @change="handleFileUpload"
-                      accept="image/*"
-                    />
-                  </div>
-                </div> -->
                 <div class="row">
                   <div class="text-center mt-3">
                     <button style="width: 25%" type="submit">
@@ -135,32 +137,12 @@
               <div class="row">
                 <div class="text-end">
                   <router-link to="/modpassword">
-                    <p style="margin-bottom: 0px; color: rgb(41, 40, 40)">Cambiar password</p>
+                    <p style="margin-bottom: 0px; color: rgb(41, 40, 40)">
+                      Cambiar password
+                    </p>
                   </router-link>
                 </div>
               </div>
-              <!--               <div class="row pt-1">
-                <div class="col-6 mb-3">
-                  <h6>Nombre(s)</h6>
-                  <p class="text-muted">{{ usuario.datos.nombre }}</p>
-                </div>
-                <div class="col-6 mb-3">
-                  <h6>Apellidos</h6>
-                  <p class="text-muted">{{ usuario.datos.apellido }}</p>
-                </div>
-              </div>
-              <div class="row pt-1">
-                <div class="col-6 mb-3">
-                  <h6>Usuario</h6>
-                  <p class="text-muted">{{ usuario.datos.username }}</p>
-                </div>
-                <div class="col-6 mb-3">
-                  <h6>Fec. de nacimiento</h6>
-                  <p class="text-muted">
-                    {{ usuario.datos.fecnac }}
-                  </p>
-                </div>
-              </div> -->
             </div>
           </div>
         </div>
@@ -182,6 +164,7 @@ export default {
       fecnac: "",
       password: "",
       reppassword: "",
+      imagen: null,
     };
   },
   methods: {
@@ -234,9 +217,9 @@ export default {
           apellido: this.apellido,
           username: this.username,
           fecnac: this.fecnac,
-          imagen: null,
+          imagenperfil: this.imagen,
         });
-        if (respuesta.data.success === 1) {
+        if (respuesta.success === 1) {
           Swal.fire({
             title: "¡Genial!",
             text: "Usuario modificado correctamente",
@@ -262,6 +245,10 @@ export default {
           icon: "warning",
         });
       }
+    },
+
+    onFileChange(event) {
+      this.imagen = event.target.files[0];
     },
   },
   computed: {

@@ -11,18 +11,18 @@
             "
           >
             <img
-              v-if="userImage"
-              :src="userImage"
-              alt="Avatar"
+              v-if="usuario.datos.imagenurl"
               class="img-fluid my-5"
-              style="border-radius: 15%; width: 130px"
+              style="border-radius: 15%; width: 170px"
+              :src="usuario.datos.imagenurl"
+              alt="User Image"
             />
             <img
               v-else
-              src="../assets/avatar.png"
-              alt="Avatar"
               class="img-fluid my-5"
               style="border-radius: 15%; width: 170px"
+              src="../assets/avatar.png"
+              alt="User Image"
             />
             <h4>Realiza un cambio a tus credenciales de ingreso</h4>
             <div class="m-4">

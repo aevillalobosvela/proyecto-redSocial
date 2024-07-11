@@ -12,18 +12,18 @@
               "
             >
               <img
-                v-if="userImage"
-                :src="userImage"
-                alt="Avatar"
+                v-if="usuario.datos.imagenurl"
                 class="img-fluid my-5"
                 style="border-radius: 15%; width: 170px"
+                :src="usuario.datos.imagenurl"
+                alt="User Image"
               />
               <img
                 v-else
-                src="../assets/avatar.png"
-                alt="Avatar"
                 class="img-fluid my-5"
                 style="border-radius: 15%; width: 170px"
+                src="../assets/avatar.png"
+                alt="User Image"
               />
               <h5>{{ usuario.datos.nombre }} {{ usuario.datos.apellido }}</h5>
               <p>{{ usuario.datos.username }}</p>
@@ -85,28 +85,28 @@
                   <div class="row">
                     <div class="col-2">
                       <img
-                        v-if="userImage"
+                        v-if="publicacion.imagenurl"
                         class="m-2 img-fluid"
                         style="
                           border-radius: 15%;
                           border: solid 1px;
                           border-color: rgb(206, 158, 186);
                         "
-                        :src="userImage"
+                        :src="publicacion.imagenurl"
                         alt="User Image"
                         width="100%"
                         height="100%"
                       />
                       <img
                         v-else
-                        class="img-fluid m-2"
+                        class="m-2 img-fluid"
                         style="
                           border-radius: 15%;
-                          padding: 5px;
                           border: solid 1px;
                           border-color: rgb(206, 158, 186);
                         "
                         src="../assets/avatar.png"
+                        alt="User Image"
                         width="100%"
                         height="100%"
                       />

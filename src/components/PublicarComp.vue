@@ -8,17 +8,17 @@
             <div class="row">
               <div class="col-2">
                 <img
-                  v-if="userImage"
-                  class="img-fluid"
+                  v-if="usuario.datos.imagenurl"
+                  class="m-2 img-fluid"
                   style="border-radius: 15%"
-                  :src="userImage"
+                  :src="usuario.datos.imagenurl"
                   alt="User Image"
                   width="100%"
                   height="100%"
                 />
                 <img
                   v-else
-                  class="img-fluid"
+                  class="m-2 img-fluid"
                   style="border-radius: 15%"
                   src="../assets/avatar.png"
                   alt="User Image"

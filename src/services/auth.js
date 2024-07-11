@@ -16,7 +16,6 @@ export default function createAuthService(axios, baseURL) {
         formData.append("password", datosUsuario.password);
         if (datosUsuario.imagenperfil) {
           formData.append("imagenperfil", datosUsuario.imagenperfil);
-        
         }
         const response = await axios.post(`${baseURL}insertar`, formData, {
           headers: {
@@ -29,8 +28,27 @@ export default function createAuthService(axios, baseURL) {
         throw new Error(`Error al registrar usuario: ${error.message}`);
       }
     },
-    modificarUsuario(datos) {
-      return axios.post(`${baseURL}actualizar`, datos);
+    modificarUsuario: async (datosUsuario) => {
+      try {
+        const formData = new FormData();
+        formData.append("id", datosUsuario.id);
+        formData.append("nombre", datosUsuario.nombre);
+        formData.append("apellido", datosUsuario.apellido);
+        formData.append("username", datosUsuario.username);
+        formData.append("fecnac", datosUsuario.fecnac);
+        if (datosUsuario.imagenperfil) {
+          formData.append("imagenperfil", datosUsuario.imagenperfil);
+        }
+        const response = await axios.post(`${baseURL}actualizar`, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
+
+        return response.data; 
+      } catch (error) {
+        throw new Error(`Error al registrar usuario: ${error.message}`);
+      }
     },
     modificarPass(datos) {
       return axios.post(`${baseURL}actualizarpass`, datos);

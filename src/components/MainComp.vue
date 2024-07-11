@@ -11,22 +11,22 @@
               <div class="row border mb-3">
                 <div class="col-4">
                   <img
-                    v-if="userImages[index]"
-                    class="img-fluid m-2"
+                    v-if="user.imagenurl"
+                    class="m-2 img-fluid"
                     style="border-radius: 50%; border: solid 1px"
-                    :src="userImages[index]"
+                    :src="user.imagenurl"
+                    alt="User Image"
                     width="60"
                     height="60"
-                    alt="Imagen de perfil del usuario"
                   />
                   <img
                     v-else
-                    class="img-fluid m-2"
+                    class="m-2 img-fluid"
                     style="border-radius: 50%; border: solid 1px"
                     src="../assets/avatar.png"
+                    alt="User Image"
                     width="60"
                     height="60"
-                    alt="Imagen de perfil del usuario"
                   />
                 </div>
                 <div class="col-8 mt-3">
@@ -113,7 +113,6 @@ export default {
   mounted() {
     this.fetchUsers(); // Obtener los usuarios cuando el componente se monta
     this.recuperarmisPubs();
-    console.log(this.usuario.datos.imagenurl);
     this.imagenperfil = this.usuario.datos.imagenurl;
   },
 };
