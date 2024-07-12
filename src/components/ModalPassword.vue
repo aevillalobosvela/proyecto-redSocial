@@ -109,7 +109,7 @@
 <script>
 import CryptoJS from "crypto-js";
 import Swal from "sweetalert2";
-import { mapState, mapGetters, mapActions } from "vuex";
+import { mapState, mapActions } from "vuex";
 export default {
   data() {
     return {
@@ -179,7 +179,6 @@ export default {
   },
   computed: {
     ...mapState(["usuario"]),
-    ...mapGetters(["userImage"]),
   },
 };
 </script>

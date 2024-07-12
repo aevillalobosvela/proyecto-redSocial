@@ -163,7 +163,7 @@
   </div>
 </template>
 <script>
-import { mapState, mapActions, mapGetters } from "vuex";
+import { mapState, mapActions } from "vuex";
 import { reactive, toRefs } from "vue";
 import Swal from "sweetalert2";
 
@@ -183,14 +183,12 @@ function obtenerFechaHoraActual() {
 export default {
   computed: {
     ...mapState(["usuario", "publicaciones", "usersconpub", "likes_in_pub"]),
-    ...mapGetters(["userImagesPub"]),
   },
   data() {
     return {
       com_publi: null,
       publicacionComentada: null,
       fec_com: null,
-      img_comentarios: null,
     };
   },
   setup() {

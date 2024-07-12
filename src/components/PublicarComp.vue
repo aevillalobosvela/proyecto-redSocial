@@ -54,12 +54,11 @@
 </template>
 
 <script>
-import { mapState, mapGetters, mapActions } from "vuex";
+import { mapState, mapActions } from "vuex";
 import Swal from "sweetalert2";
 export default {
   computed: {
     ...mapState(["usuario"]),
-    ...mapGetters(["userImage"]),
   },
   data() {
     return {

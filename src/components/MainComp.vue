@@ -93,11 +93,10 @@
 </template>
 
 <script>
-import { mapState, mapActions, mapGetters } from "vuex";
+import { mapState, mapActions } from "vuex";
 export default {
   computed: {
     ...mapState(["usuario", "users", "count_pubs", "likes_user"]),
-    ...mapGetters(["userImage", "userImages"]),
   },
   data() {
     return {
@@ -111,7 +110,7 @@ export default {
     ...mapActions(["recuperarmisPubs"]),
   },
   mounted() {
-    this.fetchUsers(); // Obtener los usuarios cuando el componente se monta
+    this.fetchUsers(); 
     this.recuperarmisPubs();
     this.imagenperfil = this.usuario.datos.imagenurl;
   },

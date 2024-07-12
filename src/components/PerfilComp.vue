@@ -165,7 +165,7 @@
 
 <script>
 import Swal from "sweetalert2";
-import { mapState, mapGetters, mapActions } from "vuex";
+import { mapState, mapActions } from "vuex";
 export default {
   data() {
     return {
@@ -236,7 +236,6 @@ export default {
   },
   computed: {
     ...mapState(["usuario", "mispubs", "count_pubs", "likes_user"]),
-    ...mapGetters(["userImage"]),
   },
 };
 </script>

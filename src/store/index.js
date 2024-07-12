@@ -13,40 +13,6 @@ export default createStore({
     likes_in_pub: [],
   },
   getters: {
-    userImage(state) {
-      if (state.usuario && state.usuario.datos.imagen) {
-        return URL.createObjectURL(
-          new Blob([new Uint8Array(state.usuario.datos.imagen.data)], {
-            type: "image/jpeg",
-          })
-        );
-      }
-      return null;
-    },
-    userImages(state) {
-      return state.users.map((user) => {
-        if (user.imagen) {
-          return URL.createObjectURL(
-            new Blob([new Uint8Array(user.imagen.data)], {
-              type: "image/jpeg",
-            })
-          );
-        }
-        return null;
-      });
-    },
-    userImagesPub(state) {
-      return state.usersconpub.map((user) => {
-        if (user.imagen) {
-          return URL.createObjectURL(
-            new Blob([new Uint8Array(user.imagen.data)], {
-              type: "image/jpeg",
-            })
-          );
-        }
-        return null;
-      });
-    },
   },
   mutations: {
     registerUser(state, newUser) {
