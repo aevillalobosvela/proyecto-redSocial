@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <div class="row mt-2">
       <div class="col-lg-3 mb-3 col-sm-12">
-        <div class="card border p-2">
+        <div class="card border p-2" style="background-color: rgba(255, 255, 255, 0.87);">
           <div class="card-header">
             <h2 class="display-6">Usuarios</h2>
           </div>
@@ -45,8 +45,8 @@
         <router-view></router-view>
       </div>
 
-      <div class="col-lg-3 col-sm-12">
-        <div class="card border">
+      <div class="col-lg-3 col-sm-12 " >
+        <div class="card border" style="background-color: rgba(255, 255, 255, 0.726);">
           <div class="card-header text-center">
             <h2 class="display-6">Mi perfil</h2>
           </div>

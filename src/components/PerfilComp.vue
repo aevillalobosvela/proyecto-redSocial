@@ -76,7 +76,7 @@
       </div>
 
       <div class="col-lg-7 col-sm-12 mt-3 mb-2">
-        <div class="card border p-3">
+        <div class="card border p-3" style="background-color: rgba(255, 255, 255, 0.726);">
           <h2 class="display-6">Mis publicaciones</h2>
           <div class="card-body" style="max-height: 420px; overflow-y: auto">
             <div v-for="(publicacion, indexp) in mispubs" :key="indexp">
@@ -139,6 +139,17 @@
                   </div>
                 </div>
                 <div class="card-body">
+                  <div class="text-center mb-1">
+                    <img
+                      v-if="publicacion.imagenurlpub"
+                      class="text-center"
+                      :src="publicacion.imagenurlpub"
+                      alt="User Image"
+                      width="50%"
+                      height="50%"
+                    />
+                  </div>
+
                   <p>
                     {{ publicacion.contenido }}
                   </p>

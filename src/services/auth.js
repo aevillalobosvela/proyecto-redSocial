@@ -45,7 +45,7 @@ export default function createAuthService(axios, baseURL) {
           },
         });
 
-        return response.data; 
+        return response.data;
       } catch (error) {
         throw new Error(`Error al registrar usuario: ${error.message}`);
       }
@@ -56,8 +56,26 @@ export default function createAuthService(axios, baseURL) {
     recuperarPubs() {
       return axios.get(`${baseURL}plista`);
     },
-    publicar(datos) {
-      return axios.put(`${baseURL}pinsertar`, datos);
+    publicar: async (datosPub) => {
+      try {
+        const formData = new FormData();
+        formData.append("contenido", datosPub.contenido);
+        formData.append("likes", datosPub.likes);
+        formData.append("fec_pub", datosPub.fec_pub);
+        formData.append("id", datosPub.id);
+        if (datosPub.imagenpubli) {
+          formData.append("imagenpubli", datosPub.imagenpubli);
+        }
+        const response = await axios.post(`${baseURL}pinsertar`, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
+
+        return response.data;
+      } catch (error) {
+        throw new Error(`Error al publicar: ${error.message}`);
+      }
     },
     recuperarComs(dato) {
       return axios.get(`${baseURL}cpublista`, { params: dato });

@@ -1,5 +1,5 @@
 <template>
-  <div class="card border p-3">
+  <div class="card border p-3" style="background-color: rgba(255, 255, 255, 0.726);">
     <h2 class="display-6">Crear publicacion</h2>
     <div class="card-body pb-0">
       <form @submit.prevent="publicar">
@@ -34,19 +34,58 @@
               </div>
             </div>
           </div>
-          <div class="card-body">
-            <p class="i">¿En que estas pensando...?</p>
-            <div class="input-group" style="height: 170px">
-              <textarea
-                required
-                v-model="contenido"
-                class="form-control"
-              ></textarea>
+          <div class="row">
+            <div class="col-8">
+              <div class="card-body pe-0">
+                <p class="i">¿En que estas pensando...?</p>
+                <div class="input-group" style="height: 230px">
+                  <textarea
+                    required
+                    v-model="contenido"
+                    class="form-control"
+                  ></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="card-body p-0">
+                <p class="i mt-3">Subir imagen</p>
+                <div class="mt-1 text-center">
+                  <input
+                    v-if="imageUrl == null"
+                    type="file"
+                    class="form-control"
+                    id="inputpubli"
+                    style="width: 83%"
+                    @change="onFileChange"
+                    accept="image/*"
+                  />
+                </div>
+                <div>
+                  <img
+                    v-if="imageUrl"
+                    :src="imageUrl"
+                    alt="Image preview"
+                    style="width: 83%"
+                  />
+                </div>
+                <div v-if="imageUrl" class="mt-2">
+                  <button
+                    style="width: 83%"
+                    @click="clearFile"
+                    class="rounded w-20"
+                  >
+                    Eliminar
+                  </button>
+                </div>
+                <div class="mt-2">
+                  <button style="width: 83%" type="submit" class="rounded w-20">
+                    Publicar
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="mt-3 text-end">
-          <button type="submit" class="rounded w-20">Publicar</button>
         </div>
       </form>
     </div>
@@ -64,10 +103,29 @@ export default {
     return {
       contenido: null,
       fec_pub: null,
+      imageUrl: null,
+      imagenpubli: null,
     };
   },
   methods: {
     ...mapActions(["recuperarmisPubs"]),
+
+    onFileChange(event) {
+      const file = event.target.files[0];
+      if (file && file.type.startsWith("image/")) {
+        this.imageUrl = URL.createObjectURL(file);
+        this.imagenpubli = event.target.files[0];
+      } else {
+        this.imageUrl = null;
+        alert("Please select an image file.");
+      }
+    },
+
+    clearFile() {
+      this.imageUrl = null;
+      this.imagenpubli = null;
+    },
+
     obtenerFechaHoraActual() {
       const ahora = new Date();
 
@@ -87,6 +145,7 @@ export default {
           contenido: this.contenido,
           likes: 0,
           fec_pub: this.fec_pub,
+          imagenpubli: this.imagenpubli,
           id: this.usuario.datos.id,
         });
         Swal.fire({
