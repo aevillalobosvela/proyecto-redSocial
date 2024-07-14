@@ -5,6 +5,7 @@ export default createStore({
   state: {
     users: [],
     usuario: null,
+    verusuario: null,
     publicaciones: [],
     usersconpub: [],
     mispubs: [],
@@ -12,8 +13,7 @@ export default createStore({
     likes_user: 0,
     likes_in_pub: [],
   },
-  getters: {
-  },
+  getters: {},
   mutations: {
     registerUser(state, newUser) {
       state.users.push(newUser);
@@ -42,6 +42,9 @@ export default createStore({
     },
     setmislikes(state, userData) {
       state.likes_user = userData.datos;
+    },
+    setverusuario(state, userData) {
+      state.verusuario = userData;
     },
   },
   actions: {

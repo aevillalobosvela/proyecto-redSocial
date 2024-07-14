@@ -2,13 +2,16 @@
   <div class="container-fluid">
     <div class="row mt-2">
       <div class="col-lg-3 mb-3 col-sm-12">
-        <div class="card border p-2" style="background-color: rgba(255, 255, 255, 0.87);">
+        <div
+          class="card border p-2"
+          style="background-color: rgba(255, 255, 255, 0.87)"
+        >
           <div class="card-header">
             <h2 class="display-6">Usuarios</h2>
           </div>
           <div class="card-body" style="max-height: 420px; overflow-y: auto">
             <div v-for="(user, index) in users" :key="index">
-              <div class="row border mb-3">
+              <div @click="verusuario(user)" class="row border mb-3">
                 <div class="col-4">
                   <img
                     v-if="user.imagenurl"
@@ -45,8 +48,11 @@
         <router-view></router-view>
       </div>
 
-      <div class="col-lg-3 col-sm-12 " >
-        <div class="card border" style="background-color: rgba(255, 255, 255, 0.726);">
+      <div class="col-lg-3 col-sm-12">
+        <div
+          class="card border"
+          style="background-color: rgba(255, 255, 255, 0.726)"
+        >
           <div class="card-header text-center">
             <h2 class="display-6">Mi perfil</h2>
           </div>
@@ -108,9 +114,21 @@ export default {
   methods: {
     ...mapActions(["fetchUsers"]),
     ...mapActions(["recuperarmisPubs"]),
+    verusuario(user) {
+      console.log(user.apellido);
+      const userData = {
+        nombre: user.nombre,
+        apellido: user.apellido,
+        username: user.username,
+        fecnac: user.fecnac,
+        imagenurl: user.imagenurl,
+      };
+      this.$store.commit("setverusuario", userData);
+      this.$router.push("/verusuario");
+    },
   },
   mounted() {
-    this.fetchUsers(); 
+    this.fetchUsers();
     this.recuperarmisPubs();
     this.imagenperfil = this.usuario.datos.imagenurl;
   },

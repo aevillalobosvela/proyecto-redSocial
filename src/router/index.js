@@ -5,6 +5,7 @@ import RegistroView from "../views/RegistroView.vue";
 import PerfilView from "../views/PerfilView.vue";
 import ModalView from "../views/ModalView.vue";
 import PassView from "../views/PassView.vue";
+import UsuariosView from "../views/UsuariosView.vue";
 
 import PublicacionesComp from "../components/PublicacionesComp.vue";
 import PublicarComp from "../components/PublicarComp.vue";
@@ -51,6 +52,11 @@ const routes = [
     path: "/modpassword",
     name: "modpassword",
     component: PassView,
+  },
+  {
+    path: "/verusuario",
+    name: "verusuario",
+    component: UsuariosView,
   },
 ];
 
