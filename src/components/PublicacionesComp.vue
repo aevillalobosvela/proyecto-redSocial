@@ -1,7 +1,9 @@
 <template>
-  <div class="card border p-3 " style="background-color: rgba(255, 255, 255, 0.726);">
-    <h2 class="display-6">Publicaciones</h2>
-    <div class="card-body" style="max-height: 420px; overflow-y: auto">
+  <div
+    class="card border p-3"
+    style="background-color: rgba(255, 255, 255, 0.726)"
+  >
+    <div class="card-body" style="max-height: 475px; overflow-y: auto">
       <div v-for="(publicacion, indexp) in usersconpub" :key="indexp">
         <div class="card border mb-4">
           <div class="card-header">
@@ -72,20 +74,21 @@
               </div>
             </div>
           </div>
-          <div class="card-body" style="background-color: rgb(248, 238, 250);">
-            <div class="text-center mb-2"> <img
-              v-if="publicacion.imagenurlpub"
-              class="text-center"
-              :src="publicacion.imagenurlpub"
-              style="border-radius: 5%;"
-              alt="User Image"
-              width="50%"
-              height="50%"
-            /></div>
-           
-            <p style="margin-bottom: 0px;">
+          <div class="card-body" style="background-color: rgb(248, 238, 250)">
+            <p style="margin-bottom: 10px; font-size: 20px;">
               {{ publicacion.contenido }}
             </p>
+            <div class="text-center mb-2">
+              <img
+                v-if="publicacion.imagenurlpub"
+                class="text-center"
+                :src="publicacion.imagenurlpub"
+                style="border-radius: 5%"
+                alt="User Image"
+                width="70%"
+                height="50%"
+              />
+            </div>
           </div>
           <ul
             class="list-group list-group-flush"

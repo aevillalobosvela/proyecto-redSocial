@@ -9,6 +9,7 @@ import UsuariosView from "../views/UsuariosView.vue";
 
 import PublicacionesComp from "../components/PublicacionesComp.vue";
 import PublicarComp from "../components/PublicarComp.vue";
+import AdminComp from "../components/AdminComp.vue";
 
 const routes = [
   {
@@ -57,6 +58,11 @@ const routes = [
     path: "/verusuario",
     name: "verusuario",
     component: UsuariosView,
+  },
+  {
+    path: "/admin",
+    name: "admin",
+    component: AdminComp,
   },
 ];
 

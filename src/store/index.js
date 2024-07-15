@@ -3,6 +3,8 @@ import services from "../services";
 
 export default createStore({
   state: {
+    adminuser: "admin123",
+    adminpass: "admin123",
     users: [],
     usuario: null,
     verusuario: null,

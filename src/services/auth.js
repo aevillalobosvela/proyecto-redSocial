@@ -50,6 +50,9 @@ export default function createAuthService(axios, baseURL) {
         throw new Error(`Error al registrar usuario: ${error.message}`);
       }
     },
+    eliminarUser(dato) {
+      return axios.delete(`${baseURL}borrar`, { params: dato });
+    },
     modificarPass(datos) {
       return axios.post(`${baseURL}actualizarpass`, datos);
     },

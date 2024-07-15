@@ -7,9 +7,9 @@
           style="background-color: rgba(255, 255, 255, 0.87)"
         >
           <div class="card-header">
-            <h2 class="display-6">Usuarios</h2>
+            <h2 style="font-size: 20px;" class="display-6">Usuarios</h2>
           </div>
-          <div class="card-body" style="max-height: 420px; overflow-y: auto">
+          <div class="card-body" style="max-height: 445px; overflow-y: auto">
             <div v-for="(user, index) in users" :key="index">
               <div @click="verusuario(user)" class="row border mb-3">
                 <div class="col-4">
@@ -54,13 +54,13 @@
           style="background-color: rgba(255, 255, 255, 0.726)"
         >
           <div class="card-header text-center">
-            <h2 class="display-6">Mi perfil</h2>
+            <h2 style="font-size: 25px;" class="display-6">Mi perfil</h2>
           </div>
           <div class="card-body">
             <div class="text-center">
               <img
                 v-if="usuario.datos.imagenurl"
-                class="m-2 img-fluid"
+                class="m-3 img-fluid"
                 style="border-radius: 15%"
                 :src="usuario.datos.imagenurl"
                 alt="User Image"
@@ -115,7 +115,6 @@ export default {
     ...mapActions(["fetchUsers"]),
     ...mapActions(["recuperarmisPubs"]),
     verusuario(user) {
-      console.log(user.apellido);
       const userData = {
         nombre: user.nombre,
         apellido: user.apellido,

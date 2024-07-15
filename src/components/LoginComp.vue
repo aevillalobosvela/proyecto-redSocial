@@ -51,9 +51,12 @@
 </template>
 
 <script>
-/* import { mapActions } from "vuex"; */
+import { mapState } from "vuex";
 import Swal from "sweetalert2";
 export default {
+  computed: {
+    ...mapState(["adminuser", "adminpass"]),
+  },
   data() {
     return {
       username: null,
@@ -62,25 +65,34 @@ export default {
   },
   methods: {
     async enviar() {
-      try {
-        const response = await this.$services.auth.login({
-          username: this.username,
-          password: this.password,
-        });
+      if (this.username == this.adminuser || this.password == this.adminuser) {
         Swal.fire({
           title: "¡Genial!",
-          text: "Bienvenido usuario",
+          text: "Bienvenido admin",
           icon: "success",
         });
-        this.$store.commit('setUserData', response.data);
-        this.$router.push("/publicaciones");
-      } catch (error) {
-        console.error("Login failed:");
-        Swal.fire({
-          title: "Que mal :(",
-          text: "Nombre de usuario o contraseña incorrectos",
-          icon: "error",
-        });
+        this.$router.push("/admin");
+      } else {
+        try {
+          const response = await this.$services.auth.login({
+            username: this.username,
+            password: this.password,
+          });
+          Swal.fire({
+            title: "¡Genial!",
+            text: "Bienvenido usuario",
+            icon: "success",
+          });
+          this.$store.commit("setUserData", response.data);
+          this.$router.push("/publicaciones");
+        } catch (error) {
+          console.error("Login failed:");
+          Swal.fire({
+            title: "Que mal :(",
+            text: "Nombre de usuario o contraseña incorrectos",
+            icon: "error",
+          });
+        }
       }
     },
   },
