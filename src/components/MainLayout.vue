@@ -28,6 +28,9 @@
             <router-link to="/perfil"
               ><i class="fa-regular fa-user fa-2x"></i
             ></router-link>
+            <router-link to="/tendencias"
+              ><i class="fa-solid fa-fire fa-2x"></i
+            ></router-link>
           </nav>
         </ul>
 

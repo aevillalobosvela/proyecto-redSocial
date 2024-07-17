@@ -14,6 +14,7 @@ export default createStore({
     count_pubs: 0,
     likes_user: 0,
     likes_in_pub: [],
+    topusersconpub: [],
   },
   getters: {},
   mutations: {
@@ -38,6 +39,9 @@ export default createStore({
     },
     setUsersconPub(state, userData) {
       state.usersconpub = userData.datos;
+    },
+    settopUsersconPub(state, userData) {
+      state.topusersconpub = userData.datos;
     },
     setlikesinPubs(state, userData) {
       state.likes_in_pub = userData.datos;
@@ -87,6 +91,15 @@ export default createStore({
       try {
         const response = await services.auth.recuperarUsersconPub();
         commit("setUsersconPub", response.data);
+      } catch (error) {
+        console.error("Fetch publicaciones usuario error:", error);
+        throw error;
+      }
+    },
+    async toprecuperarUsersconPub({ commit }) {
+      try {
+        const response = await services.auth.toprecuperarUsersconPub();
+        commit("settopUsersconPub", response.data);
       } catch (error) {
         console.error("Fetch publicaciones usuario error:", error);
         throw error;

@@ -8,6 +8,7 @@ import PassView from "../views/PassView.vue";
 import UsuariosView from "../views/UsuariosView.vue";
 
 import PublicacionesComp from "../components/PublicacionesComp.vue";
+import TendenciasComp from "../components/TendenciasComp.vue";
 import PublicarComp from "../components/PublicarComp.vue";
 import AdminComp from "../components/AdminComp.vue";
 
@@ -26,6 +27,11 @@ const routes = [
         path: "/publicaciones",
         name: "publicaciones",
         component: PublicacionesComp,
+      },
+      {
+        path: "/tendencias",
+        name: "tendencias",
+        component: TendenciasComp,
       },
       {
         path: "/publicar",
